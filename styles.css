@@ -1,113 +1,66 @@
-:root{
-  --bg:#000;
-  --accent:#e50914; /* vermelho cinematográfico */
-  --muted:rgba(255,255,255,0.85);
-  --glass: rgba(0,0,0,0.55);
-  --max-width:1200px;
+/* Intro com vídeo */
+.intro-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: #000;
+  transition: opacity .6s ease, visibility .6s ease;
 }
-*{box-sizing:border-box}
-html,body{height:100%}
-body{
-  margin:0;
-  font-family:Inter, "Montserrat", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-  background:var(--bg);
-  color:#fff;
-  -webkit-font-smoothing:antialiased;
-  -moz-osx-font-smoothing:grayscale;
+.intro-screen[aria-hidden="true"]{opacity:0;visibility:hidden;pointer-events:none}
+
+#introVideo{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  filter:brightness(.45);
+  z-index:1;
 }
 
-/* Overlay screens (splash, profiles) */
-.overlay-screen{
-  position:fixed;
-  inset:0;
+.intro-overlay{
+  position:relative;
+  z-index:2;
+  text-align:center;
+  color:#fff;
   display:flex;
   flex-direction:column;
+  gap:12px;
   align-items:center;
-  justify-content:center;
-  gap:20px;
-  z-index:60;
-  transition:opacity .6s ease, transform .6s ease;
-  background:linear-gradient(180deg, rgba(0,0,0,0.85), rgba(0,0,0,0.95));
   padding:20px;
-  text-align:center;
-  opacity:0;
-  pointer-events:none;
-  transform:scale(.98);
 }
-.overlay-screen.active{opacity:1;pointer-events:auto;transform:none}
 
 .brand-placeholder{
-  width:320px;
-  height:80px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
   background:linear-gradient(90deg,#111,#222);
+  color:#e50914;
+  padding:8px 18px;
   border-radius:6px;
-  box-shadow:0 10px 30px rgba(0,0,0,.6);
+  font-weight:800;
   letter-spacing:6px;
 }
-.brand-text{
-  color:var(--accent);
-  font-weight:800;
-  font-size:28px;
+
+.intro-title{font-size:48px;margin:6px 0}
+.intro-sub{font-size:18px;opacity:.95}
+
+/* animações de entrada */
+.intro-overlay .intro-title,
+.intro-overlay .intro-sub,
+.brand-placeholder{
+  transform:translateY(12px);
+  opacity:0;
+  animation:introFadeUp .8s ease forwards;
+}
+.brand-placeholder{animation-delay:.6s}
+.intro-title{animation-delay:1.0s}
+.intro-sub{animation-delay:1.6s}
+
+@keyframes introFadeUp{
+  to{transform:none;opacity:1}
 }
 
-/* Splash */
-.splash-title{font-size:48px;margin:12px 0 6px}
-.splash-sub{opacity:.9;margin:0 0 18px}
-
-/* Profiles */
-.profiles-grid{display:flex;gap:18px;align-items:center;justify-content:center}
-.profile-card{
-  background:var(--glass);
-  border:2px solid rgba(255,255,255,0.06);
-  padding:18px 26px;
-  border-radius:8px;
-  color:var(--muted);
-  cursor:pointer;
-  transition:transform .2s ease, box-shadow .2s ease;
-}
-.profile-card:focus, .profile-card:hover{transform:translateY(-6px);box-shadow:0 20px 40px rgba(0,0,0,.6)}
-
-/* Buttons */
-.btn{padding:10px 18px;border-radius:6px;border:0;cursor:pointer;background:var(--accent);color:#fff;font-weight:600}
-.btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.08)}
-.icon-btn{background:transparent;border:0;color:#fff;font-size:18px;cursor:pointer}
-
-/* Player */
-.hidden{display:none}
-.topbar{position:fixed;top:0;left:0;right:0;height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 20px;background:linear-gradient(180deg, rgba(0,0,0,0.6), transparent);z-index:40}
-.logo-small{font-weight:700;letter-spacing:2px}
-.chapters{scroll-snap-type:y mandatory;height:100vh;overflow-y:scroll}
-.chapter{min-height:100vh;background-size:cover;background-position:center;display:flex;align-items:center;justify-content:center;scroll-snap-align:start;position:relative}
-.chapter-overlay{background:linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.35));padding:40px;border-radius:8px;max-width:var(--max-width);margin:40px}
-.chapter-ep{color:var(--accent);letter-spacing:2px;margin:0 0 8px}
-.chapter-title{font-size:36px;margin:0 0 12px}
-.chapter-text{font-size:18px;line-height:1.5;color:rgba(255,255,255,0.92)}
-
-/* Cinematic bars */
-.cinema-bars{position:fixed;left:0;right:0;height:8vh;background:#000;z-index:70}
-.cinema-bars.top{top:0}
-.cinema-bars.bottom{bottom:0}
-
-/* Player UI */
-.player-ui{position:fixed;left:50%;transform:translateX(-50%);bottom:28px;display:flex;align-items:center;gap:12px;z-index:50}
-.nav-btn{background:rgba(0,0,0,0.6);border:1px solid rgba(255,255,255,0.06);color:#fff;padding:10px 14px;border-radius:6px;cursor:pointer}
-.progress-wrap{width:60vw;height:8px;background:rgba(255,255,255,0.06);border-radius:8px;overflow:hidden}
-.progress{height:100%;width:0;background:linear-gradient(90deg,var(--accent),#ff6b6b)}
-
-/* Modal */
-.modal{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.6);z-index:80;opacity:0;pointer-events:none;transition:opacity .2s}
-.modal[aria-hidden="false"]{opacity:1;pointer-events:auto}
-.modal-content{background:#0b0b0b;padding:20px;border-radius:8px;width:min(900px,95%);max-height:80vh;overflow:auto}
-.transcript-body{white-space:pre-wrap;color:#ddd}
-
-/* Responsive tweaks */
-@media (max-width:800px){
-  .chapter-title{font-size:22px}
-  .splash-title{font-size:28px}
-  .brand-placeholder{width:220px;height:56px}
-  .player-ui{width:95%;left:50%;transform:translateX(-50%)}
-  .progress-wrap{width:60%}
-}
+/* fade-out automático (quando JS define aria-hidden=true) */
+.intro-screen.fade-out{opacity:0;visibility:hidden;pointer-events:none;transition:opacity .8s ease, visibility .8s ease}
