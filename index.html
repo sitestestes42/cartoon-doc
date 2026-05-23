@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Cartoon Network — Documentário</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Intro / Splash -->
+  <div id="splash" class="overlay-screen active" aria-hidden="false">
+    <div class="cinema-bars top"></div>
+    <div class="cinema-bars bottom"></div>
+
+    <!-- Placeholder estilizado para logo (NÃO é logo Netflix oficial) -->
+    <div class="brand-placeholder" role="img" aria-label="Marca do documentário">
+      <span class="brand-text">NETFLIX STYLE</span>
+    </div>
+
+    <div class="splash-content">
+      <h1 class="splash-title">CARTOON NETWORK</h1>
+      <p class="splash-sub">Ciclo de vida, declínio e reinvenção</p>
+      <button id="enterProfiles" class="btn primary">Selecionar Perfil</button>
+    </div>
+  </div>
+
+  <!-- Perfil / Seleção de usuário -->
+  <div id="profiles" class="overlay-screen" aria-hidden="true">
+    <h2 class="section-title">Quem está assistindo?</h2>
+    <div class="profiles-grid" role="list">
+      <button class="profile-card" data-profile="Flavio" role="listitem">Flavio</button>
+      <button class="profile-card" data-profile="Convidado" role="listitem">Convidado</button>
+      <button class="profile-card" data-profile="Estudante" role="listitem">Estudante</button>
+    </div>
+    <button id="skipProfiles" class="btn ghost">Pular</button>
+  </div>
+
+  <!-- Player principal / capítulos -->
+  <main id="player" class="hidden" tabindex="-1">
+    <audio id="bgAudio" loop preload="auto">
+      <source src="assets/trailer.mp3" type="audio/mpeg" />
+    </audio>
+
+    <nav class="topbar">
+      <div class="logo-small">CN DOC</div>
+      <div class="controls">
+        <button id="toggleAudio" class="icon-btn" aria-pressed="false" title="Ativar/Desativar áudio">🔊</button>
+        <button id="openTranscript" class="icon-btn" title="Abrir transcrição">📝</button>
+      </div>
+    </nav>
+
+    <div id="chapters" class="chapters">
+      <!-- Cada section é um capítulo "episódio" -->
+      <section class="chapter" data-index="0" id="ch-0" style="background-image:url('assets/bg1.jpg')">
+        <div class="chapter-overlay">
+          <h2 class="chapter-ep">1 • Declínio Avançado</h2>
+          <h3 class="chapter-title">No mercado televisivo: DECLÍNIO AVANÇADO</h3>
+          <p class="chapter-text">A Cartoon Network foi uma das maiores marcas infantis do mundo entre 1998 e 2014...</p>
+        </div>
+      </section>
+
+      <section class="chapter" data-index="1" id="ch-1" style="background-image:url('assets/bg2.jpg')">
+        <div class="chapter-overlay">
+          <h2 class="chapter-ep">2 • Absorção Corporativa</h2>
+          <h3 class="chapter-title">No streaming: FASE DE ABSORÇÃO CORPORATIVA</h3>
+          <p class="chapter-text">No setor digital, a Cartoon Network deixou de existir como ecossistema próprio...</p>
+        </div>
+      </section>
+
+      <section class="chapter" data-index="2" id="ch-2" style="background-image:url('assets/bg3.jpg')">
+        <div class="chapter-overlay">
+          <h2 class="chapter-ep">3 • Erosão de Identidade</h2>
+          <h3 class="chapter-title">Culturalmente: FASE DE EROSÃO DE IDENTIDADE</h3>
+          <p class="chapter-text">Produções como Adventure Time e Steven Universe formaram uma identidade cultural...</p>
+        </div>
+      </section>
+
+      <section class="chapter" data-index="3" id="ch-3" style="background-image:url('assets/bg4.jpg')">
+        <div class="chapter-overlay">
+          <h2 class="chapter-ep">4 • Marco 2016–2018</h2>
+          <h3 class="chapter-title">Início do declínio estrutural</h3>
+          <p class="chapter-text">O início do declínio estrutural ocorreu aproximadamente entre 2016 e 2018...</p>
+        </div>
+      </section>
+
+      <section class="chapter" data-index="4" id="ch-4" style="background-image:url('assets/bg5.jpg')">
+        <div class="chapter-overlay">
+          <h2 class="chapter-ep">5 • 2022 — Ponto de ruptura</h2>
+          <h3 class="chapter-title">Fusão e consolidação</h3>
+          <p class="chapter-text">O ponto de ruptura foi 2022, após a fusão que criou a Warner Bros. Discovery...</p>
+        </div>
+      </section>
+    </div>
+
+    <div class="player-ui">
+      <button id="prevBtn" class="nav-btn">◀</button>
+      <div class="progress-wrap" aria-hidden="true">
+        <div id="progress" class="progress"></div>
+      </div>
+      <button id="nextBtn" class="nav-btn">▶</button>
+    </div>
+  </main>
+
+  <!-- Transcrição modal -->
+  <aside id="transcriptModal" class="modal" aria-hidden="true" role="dialog" aria-label="Transcrição">
+    <div class="modal-content">
+      <header>
+        <h3>Transcrição</h3>
+        <div class="modal-actions">
+          <button id="downloadTranscript" class="btn">Baixar .txt</button>
+          <button id="closeTranscript" class="btn ghost">Fechar</button>
+        </div>
+      </header>
+      <div class="transcript-body" id="transcriptBody">
+        <!-- Texto gerado dinamicamente -->
+      </div>
+    </div>
+  </aside>
+
+  <script src="app.js"></script>
+</body>
+</html>
