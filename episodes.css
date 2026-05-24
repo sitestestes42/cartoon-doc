@@ -1,0 +1,10 @@
+.episodes-panel{display:flex;gap:20px;padding:18px;color:#fff;background:rgba(0,0,0,0.6);border-radius:10px}
+.episodes-list{width:320px;max-height:64vh;overflow:auto;padding:8px;border-right:1px solid rgba(255,255,255,0.04)}
+.episode-item{display:flex;gap:10px;padding:10px;border-radius:8px;cursor:pointer}
+.episode-item:hover{background:rgba(255,255,255,0.05)}
+.ep-thumb{width:84px;height:56px;border-radius:6px;background:#111;display:flex;align-items:center;justify-content:center;color:#fff}
+.ep-meta{flex:1;display:flex;flex-direction:column;gap:6px}
+.ep-title{font-weight:700;font-size:14px}
+.ep-summary{font-size:12px;color:rgba(255,255,255,0.8)}
+.episodes-player{flex:1;display:flex;flex-direction:column;gap:12px;padding:8px}
+.transcript-panel{max-height:36vh;overflow:auto;padding:12px;background:rgba(0,0,0,0.45);border-radius:8px}

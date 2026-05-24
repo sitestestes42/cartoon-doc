@@ -1,0 +1,23 @@
+[
+  {
+    "id": "ep1-declinio-avancado",
+    "title": "No mercado televisivo: Declínio Avançado",
+    "duration": "08:30",
+    "summary": "A Cartoon Network dominou a TV paga entre 1998–2014; hoje enfrenta queda de audiência e redução de produções originais.",
+    "transcript": "A Cartoon Network foi uma das maiores marcas infantis do mundo entre os anos 1998 e 2014... (texto completo da seção)",
+    "thumbnail": "assets/episodes/ep1.jpg",
+    "video": "assets/intro.mp4",
+    "order": 1
+  },
+  {
+    "id": "ep2-absorpcao-corporativa",
+    "title": "No streaming: Fase de Absorção Corporativa",
+    "duration": "06:40",
+    "summary": "O CN deixou de ser ecossistema próprio e virou biblioteca dentro do Max; fechamento do site e do Boomerang são sinais.",
+    "transcript": "No setor digital, a Cartoon Network deixou de existir como ecossistema próprio... (texto completo da seção)",
+    "thumbnail": "assets/episodes/ep2.jpg",
+    "video": "assets/intro.mp4",
+    "order": 2
+  }
+  // continue com os episódios 3 a 6
+]
