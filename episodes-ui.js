@@ -1,9 +1,14 @@
-// episodes-ui.js - Versão Blindada com Logs de Diagnóstico
+// episodes-ui.js - Versão com Interceptador de Evento Nativo (Anti-Reset)
 (() => {
-  console.log("[Cartoon Doc] Script episodes-ui.js foi carregado com sucesso!");
+  console.log("[Cartoon Doc] Módulo carregado com interceptador de segurança.");
 
   let episodesData = [];
   let isDocUiInitialized = false;
+  
+  // Controle de estados do reprodutor
+  let currentPlayingEpisode = null;
+  let isPlayingIntro = false;
+  let blockNativeEnded = false;
 
   const saveProgress = (id) => {
     let progress = JSON.parse(localStorage.getItem('episodes_progress') || '{}');
@@ -14,29 +19,40 @@
   const fetchEpisodes = async () => {
     try {
       const res = await fetch('episodes.json');
-      if (!res.ok) throw new Error('Não encontrou o arquivo episodes.json na raiz');
+      if (!res.ok) throw new Error('Não encontrou episodes.json');
       episodesData = await res.json();
-      console.log("[Cartoon Doc] Episódios carregados do JSON:", episodesData.length);
       renderEpisodesList(episodesData);
     } catch (err) {
-      console.error("[Cartoon Doc] Erro crítico ao buscar o JSON:", err);
+      console.error("[Cartoon Doc] Erro ao carregar JSON:", err);
     }
   };
 
   const injectDocumentaryUI = (playerSection) => {
     if (isDocUiInitialized || !playerSection) return;
-    console.log("[Cartoon Doc] Iniciando a injeção da interface do Documentário...");
 
     const originalVideoWrapper = playerSection.querySelector('.video-wrapper');
     const backBtn = document.getElementById('backToProfilesBtn') || playerSection.querySelector('button');
-    const originalTitle = document.getElementById('playerTitle') || playerSection.querySelector('h2') || playerSection.querySelector('h1');
+    const originalTitle = document.getElementById('playerTitle') || playerSection.querySelector('h2');
+    const videoElem = originalVideoWrapper ? originalVideoWrapper.querySelector('video') : null;
 
-    if (!originalVideoWrapper || !backBtn) {
-      console.warn("[Cartoon Doc] Elementos estruturais do player não foram encontrados para a injeção.");
-      return;
+    if (!originalVideoWrapper || !backBtn || !videoElem) return;
+
+    // --- ENGENHARIA DE INTERCEPTAÇÃO DO EVENTO ENDED ---
+    if (!videoElem.dataset.hooked) {
+      videoElem.dataset.hooked = "true";
+      
+      // Captura o evento antes que ele se propague para o app.js original
+      videoElem.addEventListener('ended', (e) => {
+        if (blockNativeEnded) {
+          e.stopImmediatePropagation(); // Cancela o evento para o app.js nativo
+          e.preventDefault();
+          console.log("[Cartoon Doc] Fim do vídeo interceptado com sucesso. Bloqueando reset do app.js.");
+          handleVideoEnded();
+        }
+      }, { capture: true }); // O segredo está no true (fase de captura)
     }
 
-    // Criar abas
+    // Criar abas de navegação
     const tabsNav = document.createElement('div');
     tabsNav.className = 'doc-tabs-nav';
     tabsNav.setAttribute('role', 'tablist');
@@ -54,7 +70,7 @@
     tabsNav.appendChild(tabDoc);
     tabsNav.appendChild(tabPlayer);
 
-    // Criar painel da lista
+    // Criar painel do documentário
     const docPanel = document.createElement('div');
     docPanel.id = 'documentaryPanel';
     docPanel.setAttribute('role', 'tabpanel');
@@ -71,7 +87,7 @@
     docPanel.appendChild(searchBar);
     docPanel.appendChild(episodesList);
 
-    // Criar seção de transcrição
+    // Criar container de transcrição
     const transcriptSection = document.createElement('div');
     transcriptSection.className = 'transcript-section';
     transcriptSection.hidden = true;
@@ -83,27 +99,25 @@
       <div id="transcriptText" class="transcript-content"></div>
     `;
 
-    // Inserir elementos no DOM usando nós vizinhos estáveis
+    // Injeção limpa no DOM
     originalVideoWrapper.parentNode.insertBefore(transcriptSection, originalVideoWrapper.nextSibling);
     backBtn.insertAdjacentElement('afterend', tabsNav);
     tabsNav.insertAdjacentElement('afterend', docPanel);
 
-    // Funções de alternância
     const showDocumentary = () => {
+      blockNativeEnded = false; 
       tabDoc.classList.add('active');
       tabPlayer.classList.remove('active');
       docPanel.hidden = false;
       originalVideoWrapper.hidden = true;
       transcriptSection.hidden = true;
       if (originalTitle) originalTitle.style.display = 'none';
-      
-      const videoElem = originalVideoWrapper.querySelector('video');
-      if (videoElem) videoElem.pause();
-      
+      videoElem.pause();
       renderEpisodesList(episodesData);
     };
 
     const showClassicPlayer = () => {
+      blockNativeEnded = false; 
       tabPlayer.classList.add('active');
       tabDoc.classList.remove('active');
       docPanel.hidden = true;
@@ -131,7 +145,6 @@
     showDocumentary();
     fetchEpisodes();
     isDocUiInitialized = true;
-    console.log("[Cartoon Doc] Interface do Documentário injetada com sucesso!");
   };
 
   const renderEpisodesList = (data) => {
@@ -171,52 +184,73 @@
     });
   };
 
+  // Executado ao clicar no card: Inicia a Intro (Vinheta)
   const playEpisode = (ep) => {
-    console.log("[Cartoon Doc] Episódio selecionado:", ep.title);
-    saveProgress(ep.id);
-    
+    currentPlayingEpisode = ep;
+    isPlayingIntro = true;
+    blockNativeEnded = true; // Ativa o escudo de interceptação
+
     const playerSection = document.getElementById('player');
     const originalVideoWrapper = playerSection.querySelector('.video-wrapper');
-    const originalTitle = document.getElementById('playerTitle') || playerSection.querySelector('h2') || playerSection.querySelector('h1');
+    const originalTitle = document.getElementById('playerTitle') || playerSection.querySelector('h2');
     const videoElem = originalVideoWrapper.querySelector('video');
     const transcriptSection = document.querySelector('.transcript-section');
-    const transcriptText = document.getElementById('transcriptText');
 
     document.getElementById('documentaryPanel').hidden = true;
     originalVideoWrapper.hidden = false;
     transcriptSection.hidden = true; 
-    
+
     if (originalTitle) {
       originalTitle.style.display = 'block';
       originalTitle.innerHTML = `Apresentando...`;
     }
-    
-    console.log("[Cartoon Doc] Iniciando reprodução da Intro de segurança...");
-    videoElem.src = 'assets/intro.mp4'; 
-    videoElem.play().catch(e => console.warn("Autoplay bloqueado na intro:", e));
 
-    videoElem.onended = () => {
-      console.log("[Cartoon Doc] Intro finalizada. Carregando conteúdo real do episódio.");
-      if (originalTitle) {
-        originalTitle.innerHTML = `Documentário: <span>${ep.title}</span>`;
-      }
-      
-      transcriptSection.hidden = false;
-      transcriptText.innerText = ep.transcript;
-      transcriptText.classList.remove('visible'); 
-      
-      videoElem.src = ep.video;
-      videoElem.play().catch(e => console.warn("Autoplay bloqueado no vídeo do episódio:", e));
-      videoElem.onended = null; 
-    };
+    // Toca a vinheta/intro primeiro
+    videoElem.src = 'assets/intro.mp4';
+    videoElem.play().catch(e => console.warn("Autoplay bloqueado na vinheta:", e));
   };
 
-  // --- HOOK DE EXECUÇÃO ULTRA-SEGURO ---
+  // Gerenciador interno de fim de vídeo (Acionado após nossa interceptação)
+  const handleVideoEnded = () => {
+    const playerSection = document.getElementById('player');
+    const originalVideoWrapper = playerSection.querySelector('.video-wrapper');
+    const originalTitle = document.getElementById('playerTitle') || playerSection.querySelector('h2');
+    const videoElem = originalVideoWrapper.querySelector('video');
+    const transcriptSection = document.querySelector('.transcript-section');
+    const transcriptText = document.getElementById('transcriptText');
+
+    if (isPlayingIntro && currentPlayingEpisode) {
+      // 1. A INTRO TERMINOU -> Carrega o Episódio Escolhido
+      isPlayingIntro = false;
+      saveProgress(currentPlayingEpisode.id);
+
+      if (originalTitle) {
+        originalTitle.innerHTML = `Documentário: <span>${currentPlayingEpisode.title}</span>`;
+      }
+
+      transcriptSection.hidden = false;
+      transcriptText.innerText = currentPlayingEpisode.transcript;
+      transcriptText.classList.remove('visible'); 
+
+      // Muda o source para o vídeo definitivo do episódio
+      videoElem.src = currentPlayingEpisode.video;
+      videoElem.play().catch(e => console.warn("Autoplay bloqueado no vídeo real:", e));
+    } else {
+      // 2. O EPISÓDIO REAL TERMINOU -> Volta para a lista de episódios sem fechar o player
+      console.log("[Cartoon Doc] Fim do episódio completo. Retornando ao painel.");
+      blockNativeEnded = false;
+      currentPlayingEpisode = null;
+      
+      const tabDoc = document.querySelector('.doc-tab-btn');
+      if (tabDoc) tabDoc.click(); // Força o retorno suave para a aba documentário
+    }
+  };
+
+  // Monitoramento ativo e polivalente do estado da tela
   const checkAndHook = () => {
     const playerSection = document.getElementById('player');
     if (!playerSection) return;
 
-    // Verifica se o player está visível no DOM (por atributo hidden, classe ou estilo computado)
     const isPlayerVisible = !playerSection.hasAttribute('hidden') && 
                             !playerSection.classList.contains('hidden') && 
                             window.getComputedStyle(playerSection).display !== 'none';
@@ -224,24 +258,20 @@
     if (isPlayerVisible && !isDocUiInitialized) {
       injectDocumentaryUI(playerSection);
     } else if (!isPlayerVisible && isDocUiInitialized) {
-      // Se voltou pra tela de perfis, permite reinicializar depois
       isDocUiInitialized = false;
+      blockNativeEnded = false;
       const tabs = document.querySelector('.doc-tabs-nav');
       const panel = document.getElementById('documentaryPanel');
       const trans = document.querySelector('.transcript-section');
       if(tabs) tabs.remove();
       if(panel) panel.remove();
       if(trans) trans.remove();
-      console.log("[Cartoon Doc] Usuário voltou aos perfis. Interface resetada.");
     }
   };
 
-  // 1. Executa imediatamente e liga o observador de mutação genérico
   checkAndHook();
   const observer = new MutationObserver(checkAndHook);
   observer.observe(document.body, { attributes: true, subtree: true, childList: true });
-
-  // 2. Fallback de contingência (Verifica a tela a cada 300ms caso o observer falhe)
   setInterval(checkAndHook, 300);
 
 })();
