@@ -1,6 +1,6 @@
-// episodes-ui.js - Versão Dashboard Premium (Painel Inicial + Lista de Episódios)
+// episodes-ui.js - Versão Forçada com Sobrescrita de CSS (!important)
 (() => {
-  console.log("[Cartoon Doc] Módulo Dashboard Inicial ativado.");
+  console.log("[Cartoon Doc] Módulo Dashboard Inicial ativado com força total de CSS.");
 
   let episodesData = [];
   let isDocUiInitialized = false;
@@ -9,7 +9,7 @@
   let isPlayingIntro = false;
   let blockNativeEnded = false;
 
-  // --- ESTILOS VISUAIS DO PAINEL NETFLIX (Injetados dinamicamente) ---
+  // Estilos visuais robustos injetados diretamente
   const injectDashboardStyles = () => {
     if (document.getElementById('netflix-core-styles')) return;
     
@@ -17,128 +17,124 @@
     style.id = 'netflix-core-styles';
     style.innerHTML = `
       .netflix-dashboard {
-        color: #fff;
-        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-        padding: 20px;
-        animation: fadeIn 0.6s ease-out;
+        color: #fff !important;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+        padding: 20px !important;
+        animation: fadeInDoc 0.6s ease-out !important;
+        display: none;
       }
       .nf-banner {
-        position: relative;
-        min-height: 450px;
-        background: linear-gradient(77s, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.2) 100%), url('painel.jpg') no-repeat center center;
-        background-size: cover;
-        border-radius: 8px;
-        padding: 60px 40px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        box-shadow: inset 0 0 100px rgba(0,0,0,0.5);
-        margin-bottom: 40px;
+        position: relative !important;
+        min-height: 400px !important;
+        background: linear-gradient(77deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.3) 100%), url('painel.jpg') no-repeat center center !important;
+        background-size: cover !important;
+        border-radius: 8px !important;
+        padding: 60px 40px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        box-shadow: inset 0 0 100px rgba(0,0,0,0.8) !important;
+        margin-bottom: 40px !important;
       }
       .nf-title {
-        font-size: 3.5rem;
-        font-weight: bold;
-        margin: 0 0 10px 0;
-        text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        font-size: 3.2rem !important;
+        font-weight: bold !important;
+        margin: 0 0 5px 0 !important;
+        color: #fff !important;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.8) !important;
       }
       .nf-subtitle {
-        font-size: 1.8rem;
-        color: #e5e5e5;
-        font-weight: 500;
-        margin-bottom: 15px;
+        font-size: 1.8rem !important;
+        color: #f1c40f !important;
+        font-weight: bold !important;
+        margin-bottom: 15px !important;
       }
       .nf-description {
-        font-size: 1.1rem;
-        max-width: 600px;
-        line-height: 1.4;
-        color: #d2d2d2;
-        margin-bottom: 25px;
-        text-shadow: 1px 1px 2px rgba(0,0,0,0.6);
+        font-size: 1.1rem !important;
+        max-width: 550px !important;
+        line-height: 1.5 !important;
+        color: #e5e5e5 !important;
+        margin-bottom: 25px !important;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.8) !important;
       }
       .nf-actions {
-        display: flex;
-        gap: 15px;
+        display: flex !important;
+        gap: 15px !important;
       }
       .nf-btn {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-        padding: 12px 28px;
-        font-size: 1.1rem;
-        font-weight: bold;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        transition: all 0.2s ease;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        padding: 12px 30px !important;
+        font-size: 1.1rem !important;
+        font-weight: bold !important;
+        border: none !important;
+        border-radius: 4px !important;
+        cursor: pointer !important;
+        transition: transform 0.2s ease, background 0.2s !important;
+      }
+      .nf-btn:hover {
+        transform: scale(1.03) !important;
       }
       .nf-btn-primary {
-        background-color: #ffffff;
-        color: #000000;
-      }
-      .nf-btn-primary:hover {
-        background-color: rgba(255, 255, 255, 0.75);
+        background-color: #ffffff !important;
+        color: #000000 !important;
       }
       .nf-btn-secondary {
-        background-color: rgba(109, 109, 110, 0.7);
-        color: #ffffff;
-      }
-      .nf-btn-secondary:hover {
-        background-color: rgba(109, 109, 110, 0.4);
+        background-color: rgba(109, 109, 110, 0.7) !important;
+        color: #ffffff !important;
       }
       .nf-section-title {
-        font-size: 1.4rem;
-        font-weight: bold;
-        margin-bottom: 15px;
-        color: #e5e5e5;
+        font-size: 1.5rem !important;
+        font-weight: bold !important;
+        margin-bottom: 20px !important;
+        color: #fff !important;
       }
       .nf-row {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-        gap: 15px;
-        margin-bottom: 30px;
+        display: grid !important;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)) !important;
+        gap: 20px !important;
+        margin-bottom: 40px !important;
       }
       .nf-card {
-        background: #141414;
-        border-radius: 4px;
-        overflow: hidden;
-        position: relative;
-        aspect-ratio: 16/10;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-end;
-        padding: 10px;
-        border: 1px solid #222;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        background: #141414 !important;
+        border-radius: 4px !important;
+        overflow: hidden !important;
+        position: relative !important;
+        aspect-ratio: 16/10 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: flex-end !important;
+        padding: 12px !important;
+        border: 1px solid #222 !important;
+        cursor: pointer !important;
+        transition: transform 0.3s ease !important;
       }
-      .nf-card-bg-placeholder {
-        position: absolute;
-        top: 0; left: 0; wight: 100%; height: 100%;
-        background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.2) 100%);
-        z-index: 1;
+      .nf-card:hover {
+        transform: scale(1.05) !important;
+        z-index: 10 !important;
       }
       .nf-card-title {
-        font-size: 0.9rem;
-        font-weight: bold;
-        z-index: 2;
-        margin-bottom: 5px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
+        font-size: 0.95rem !important;
+        font-weight: bold !important;
+        color: #fff !important;
+        z-index: 5 !important;
+        margin-bottom: 6px !important;
+        text-shadow: 1px 1px 3px rgba(0,0,0,1) !important;
       }
       .nf-badge {
-        background-color: #e50914;
-        color: white;
-        font-size: 0.7rem;
-        font-weight: bold;
-        padding: 2px 6px;
-        border-radius: 2px;
-        align-self: flex-start;
-        z-index: 2;
-        text-transform: uppercase;
+        background-color: #e50914 !important;
+        color: white !important;
+        font-size: 0.7rem !important;
+        font-weight: bold !important;
+        padding: 3px 8px !important;
+        border-radius: 2px !important;
+        align-self: flex-start !important;
+        z-index: 5 !important;
+        text-transform: uppercase !important;
       }
-      @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(10px); }
+      @keyframes fadeInDoc {
+        from { opacity: 0; transform: translateY(15px); }
         to { opacity: 1; transform: translateY(0); }
       }
     `;
@@ -174,7 +170,7 @@
 
     if (!originalVideoWrapper || !backBtn || !videoElem) return;
 
-    // Engenharia de Interceptação de Fim de Vídeo
+    // Escudo de Interceptação da Vinheta/Intro
     if (!videoElem.dataset.hooked) {
       videoElem.dataset.hooked = "true";
       videoElem.addEventListener('ended', (e) => {
@@ -186,7 +182,7 @@
       }, { capture: true });
     }
 
-    // --- 1. CRIAR O PAINEL NETFLIX COMPLETO ---
+    // --- CRIAÇÃO DO PAINEL DASHBOARD NETFLIX ---
     const dashboardPanel = document.createElement('div');
     dashboardPanel.id = 'netflixDashboardPanel';
     dashboardPanel.className = 'netflix-dashboard';
@@ -203,34 +199,33 @@
       
       <div class="nf-section-title">Dicas para você</div>
       <div class="nf-row">
-        <div class="nf-card" style="background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.85)), url('assets/chris.jpg') center/cover;">
+        <div class="nf-card" style="background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.9)), url('assets/chris.jpg') center/cover no-repeat !important;">
           <div class="nf-card-title">Todo Mundo Ainda Odeia o Chris</div>
           <span class="nf-badge">Novidade</span>
         </div>
-        <div class="nf-card" style="background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.85)), url('assets/oth.jpg') center/cover;">
+        <div class="nf-card" style="background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.9)), url('assets/oth.jpg') center/cover no-repeat !important;">
           <div class="nf-card-title">One Tree Hill</div>
           <span class="nf-badge">Novidade</span>
         </div>
-        <div class="nf-card" style="background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.85)), url('assets/horimiya.jpg') center/cover;">
+        <div class="nf-card" style="background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.9)), url('assets/horimiya.jpg') center/cover no-repeat !important;">
           <div class="nf-card-title">Horimiya</div>
           <span class="nf-badge">Novidade</span>
         </div>
-        <div class="nf-card" style="background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.85)), url('assets/dmc.jpg') center/cover;">
+        <div class="nf-card" style="background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.9)), url('assets/dmc.jpg') center/cover no-repeat !important;">
           <div class="nf-card-title">Devil May Cry</div>
           <span class="nf-badge">Nova Temporada</span>
         </div>
-        <div class="nf-card" style="background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.85)), url('assets/shangri.jpg') center/cover;">
+        <div class="nf-card" style="background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.9)), url('assets/shangri.jpg') center/cover no-repeat !important;">
           <div class="nf-card-title">Shangri-La Frontier</div>
           <span class="nf-badge">Novidade</span>
         </div>
       </div>
     `;
 
-    // --- 2. CRIAR ABAS DE NAVEGAÇÃO ---
+    // --- CRIAÇÃO DAS ABAS ---
     const tabsNav = document.createElement('div');
     tabsNav.className = 'doc-tabs-nav';
-    tabsNav.setAttribute('role', 'tablist');
-    tabsNav.style.display = 'none'; // Começa oculto até clicar em Assistir
+    tabsNav.style.setProperty('display', 'none', 'important');
 
     const tabDoc = document.createElement('button');
     tabDoc.className = 'doc-tab-btn active';
@@ -243,11 +238,10 @@
     tabsNav.appendChild(tabDoc);
     tabsNav.appendChild(tabBackHome);
 
-    // --- 3. CRIAR PAINEL DA LISTA DE EPISÓDIOS ---
+    // --- CRIAÇÃO DO CONTRA-PAINEL DE EPISÓDIOS ---
     const docPanel = document.createElement('div');
     docPanel.id = 'documentaryPanel';
-    docPanel.setAttribute('role', 'tabpanel');
-    docPanel.hidden = true; // Começa oculto
+    docPanel.style.setProperty('display', 'none', 'important');
 
     const searchBar = document.createElement('input');
     searchBar.type = 'text';
@@ -260,10 +254,10 @@
     docPanel.appendChild(searchBar);
     docPanel.appendChild(episodesList);
 
-    // --- 4. CRIAR SEÇÃO DE TRANSCRIÇÃO ---
+    // --- SEÇÃO DE TRANSCRIÇÃO ---
     const transcriptSection = document.createElement('div');
     transcriptSection.className = 'transcript-section';
-    transcriptSection.hidden = true;
+    transcriptSection.style.setProperty('display', 'none', 'important');
     transcriptSection.innerHTML = `
       <div class="transcript-header">
         <h3>Transcrição</h3>
@@ -272,40 +266,40 @@
       <div id="transcriptText" class="transcript-content"></div>
     `;
 
-    // Organização de montagem no DOM
+    // Montagem estruturada ignorando posições flutuantes antigas
     originalVideoWrapper.parentNode.insertBefore(transcriptSection, originalVideoWrapper.nextSibling);
     backBtn.insertAdjacentElement('afterend', dashboardPanel);
     dashboardPanel.insertAdjacentElement('afterend', tabsNav);
     tabsNav.insertAdjacentElement('afterend', docPanel);
 
-    // --- CONFIGURAÇÃO DE TRANSIÇÕES ENTRE TELAS ---
+    // --- SISTEMA DE CHAVEAMENTO IMPERATIVO COM !IMPORTANT ---
     const showDashboard = () => {
       blockNativeEnded = false;
-      dashboardPanel.style.display = 'block';
-      tabsNav.style.display = 'none';
-      docPanel.hidden = true;
-      originalVideoWrapper.hidden = true;
-      transcriptSection.hidden = true;
-      if (originalTitle) originalTitle.style.display = 'none';
+      dashboardPanel.style.setProperty('display', 'block', 'important');
+      tabsNav.style.setProperty('display', 'none', 'important');
+      docPanel.style.setProperty('display', 'none', 'important');
+      originalVideoWrapper.style.setProperty('display', 'none', 'important');
+      transcriptSection.style.setProperty('display', 'none', 'important');
+      if (originalTitle) originalTitle.style.setProperty('display', 'none', 'important');
       videoElem.pause();
     };
 
     const showEpisodesGrid = () => {
       blockNativeEnded = false;
-      dashboardPanel.style.display = 'none';
-      tabsNav.style.display = 'flex';
-      docPanel.hidden = false;
-      originalVideoWrapper.hidden = true;
-      transcriptSection.hidden = true;
-      if (originalTitle) originalTitle.style.display = 'none';
+      dashboardPanel.style.setProperty('display', 'none', 'important');
+      tabsNav.style.setProperty('display', 'flex', 'important');
+      docPanel.style.setProperty('display', 'block', 'important');
+      originalVideoWrapper.style.setProperty('display', 'none', 'important');
+      transcriptSection.style.setProperty('display', 'none', 'important');
+      if (originalTitle) originalTitle.style.setProperty('display', 'none', 'important');
       videoElem.pause();
       renderEpisodesList(episodesData);
     };
 
-    // Listeners dos botões principais
+    // Ações de clique interativas do Painel Principal
     dashboardPanel.querySelector('#nfPlayBtn').addEventListener('click', showEpisodesGrid);
     dashboardPanel.querySelector('#nfInfoBtn').addEventListener('click', () => {
-      alert("Cartoon Network: Declínio e Reinvenção\n\nProdução independente analisando as fases da emissora de animação mais famosa do mundo.");
+      alert("Cartoon Network: Declínio e Reinvenção\n\nUma análise profunda sobre as transformações, eras de ouro e os desafios digitais enfrentados pela marca.");
     });
 
     tabDoc.addEventListener('click', showEpisodesGrid);
@@ -324,7 +318,7 @@
       document.getElementById('transcriptText').classList.toggle('visible');
     });
 
-    // Inicia mostrando a Dashboard estilo Netflix
+    // Estado inicial: Dashboard Visível, player antigo trancado e ocultado
     showDashboard();
     fetchEpisodes();
     isDocUiInitialized = true;
@@ -378,20 +372,20 @@
     const videoElem = originalVideoWrapper.querySelector('video');
     const transcriptSection = document.querySelector('.transcript-section');
 
-    document.getElementById('documentaryPanel').hidden = true;
-    document.getElementById('netflixDashboardPanel').style.display = 'none';
-    document.querySelector('.doc-tabs-nav').style.display = 'none';
+    document.getElementById('documentaryPanel').style.setProperty('display', 'none', 'important');
+    document.getElementById('netflixDashboardPanel').style.setProperty('display', 'none', 'important');
+    document.querySelector('.doc-tabs-nav').style.setProperty('display', 'none', 'important');
     
-    originalVideoWrapper.hidden = false;
-    transcriptSection.hidden = true; 
+    originalVideoWrapper.style.setProperty('display', 'block', 'important');
+    transcriptSection.style.setProperty('display', 'none', 'important'); 
 
     if (originalTitle) {
-      originalTitle.style.display = 'block';
+      originalTitle.style.setProperty('display', 'block', 'important');
       originalTitle.innerHTML = `Apresentando...`;
     }
 
     videoElem.src = 'assets/intro.mp4';
-    videoElem.play().catch(e => console.warn("Autoplay da intro pendente de clique:", e));
+    videoElem.play().catch(e => console.warn("Autoplay impedido, aguardando clique:", e));
   };
 
   const handleVideoEnded = () => {
@@ -410,26 +404,23 @@
         originalTitle.innerHTML = `Documentário: <span>${currentPlayingEpisode.title}</span>`;
       }
 
-      transcriptSection.hidden = false;
+      transcriptSection.style.setProperty('display', 'block', 'important');
       transcriptText.innerText = currentPlayingEpisode.transcript;
       transcriptText.classList.remove('visible'); 
 
       videoElem.src = currentPlayingEpisode.video;
-      videoElem.play().catch(e => console.warn("Autoplay do episódio pendente de clique:", e));
+      videoElem.play().catch(e => console.warn("Autoplay do episódio aguardando clique:", e));
     } else {
       blockNativeEnded = false;
       currentPlayingEpisode = null;
       
-      // Quando o episódio acaba por completo, retorna para a lista de seleção
-      const panel = document.getElementById('documentaryPanel');
-      if (panel) {
-        document.getElementById('netflixDashboardPanel').style.display = 'none';
-        document.querySelector('.doc-tabs-nav').style.display = 'flex';
-        panel.hidden = false;
-        originalVideoWrapper.hidden = true;
-        transcriptSection.hidden = true;
-        if (originalTitle) originalTitle.style.display = 'none';
-      }
+      // Ao terminar o episódio real, reativa a interface de seleção e limpa o player
+      document.getElementById('netflixDashboardPanel').style.setProperty('display', 'none', 'important');
+      document.querySelector('.doc-tabs-nav').style.setProperty('display', 'flex', 'important');
+      document.getElementById('documentaryPanel').style.setProperty('display', 'block', 'important');
+      originalVideoWrapper.style.setProperty('display', 'none', 'important');
+      transcriptSection.style.setProperty('display', 'none', 'important');
+      if (originalTitle) originalTitle.style.setProperty('display', 'none', 'important');
     }
   };
 
@@ -460,6 +451,6 @@
   checkAndHook();
   const observer = new MutationObserver(checkAndHook);
   observer.observe(document.body, { attributes: true, subtree: true, childList: true });
-  setInterval(checkAndHook, 300);
+  setInterval(checkAndHook, 400);
 
 })();
