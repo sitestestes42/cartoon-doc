@@ -11,7 +11,10 @@ const ASSETS = [
   '/assets/augusto.jpg',
   '/assets/juan.jpg',
   '/assets/ricardo.jpg',
-  '/assets/bg1.jpg' // Mencionou no contexto
+  '/assets/bg1.jpg', // Mencionou no contexto
+  '/episodes.json',
+  '/episodes.css',
+  '/episodes-ui.js'
 ];
 
 // Instalação: Cache inicial
