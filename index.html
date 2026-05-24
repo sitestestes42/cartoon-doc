@@ -3,77 +3,65 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Cartoon Network — Documentário</title>
+  <title>Quem está assistindo — Cartoon Doc</title>
   <link rel="stylesheet" href="styles.css" />
+  <meta name="theme-color" content="#0b0b0b" />
 </head>
 <body>
-  <!-- Intro (se já tiver) -->
-  <div id="intro" class="intro-screen" aria-hidden="true" style="display:none;">
-    <video id="introVideo" autoplay muted playsinline preload="auto" poster="assets/intro-poster.jpg">
-      <source src="assets/intro.mp4" type="video/mp4">
-    </video>
-    <div class="intro-overlay">
-      <div class="brand-placeholder">NETFLIX STYLE</div>
-      <h1 class="intro-title">Cartoon Network</h1>
-      <p class="intro-sub">Declínio e reinvenção</p>
-    </div>
-  </div>
+  <main id="app" class="app">
+    <header class="top">
+      <div class="brand">CARTOON DOC</div>
+      <button id="manageBtn" class="btn ghost" aria-haspopup="dialog">Gerenciar perfis</button>
+    </header>
 
-  <!-- Splash / tela inicial simples -->
-  <div id="splash" class="overlay-screen">
-    <div class="splash-content">
-      <h1 class="splash-title">CARTOON NETWORK</h1>
-      <p class="splash-sub">Ciclo de vida, declínio e reinvenção</p>
-      <button id="enterProfiles" class="btn primary">Selecionar Perfil</button>
-    </div>
-  </div>
+    <section id="profiles" class="profiles" aria-labelledby="profilesTitle">
+      <h1 id="profilesTitle" class="title">Quem está assistindo?</h1>
 
-  <!-- Perfis com fundo único -->
-  <section id="profiles" class="profiles-screen" aria-hidden="true">
-    <div class="profiles-overlay"></div>
-    <div class="profiles-inner" role="region" aria-label="Seleção de perfis">
-      <h2 class="profiles-title">Quem está assistindo?</h2>
-
-      <div class="profiles-grid" role="list">
-        <button class="profile-card" data-profile="Flavio" role="listitem" aria-label="Flavio">
-          <div class="avatar">F</div>
-          <span class="profile-name">Flavio</span>
-        </button>
-
-        <button class="profile-card" data-profile="Convidado" role="listitem" aria-label="Convidado">
-          <div class="avatar">C</div>
-          <span class="profile-name">Convidado</span>
-        </button>
-
-        <button class="profile-card" data-profile="Estudante" role="listitem" aria-label="Estudante">
-          <div class="avatar">E</div>
-          <span class="profile-name">Estudante</span>
-        </button>
-      </div>
-
-      <div class="profiles-actions">
-        <button id="skipProfiles" class="btn ghost">Pular</button>
-      </div>
-    </div>
-  </section>
-
-  <!-- Player placeholder -->
-  <main id="player" class="hidden" tabindex="-1" aria-hidden="true">
-    <nav class="topbar">
-      <div class="logo-small">CN DOC</div>
-    </nav>
-
-    <div id="chapters" class="chapters">
-      <section class="chapter" data-index="0" style="background-image:url('assets/bg1.jpg')">
-        <div class="chapter-overlay">
-          <h2 class="chapter-ep">1 • Declínio Avançado</h2>
-          <h3 class="chapter-title">No mercado televisivo: DECLÍNIO AVANÇADO</h3>
-          <p class="chapter-text">A Cartoon Network foi uma das maiores marcas infantis do mundo entre 1998 e 2014...</p>
+      <!-- Fallback content for no-JS -->
+      <noscript>
+        <div class="nojs">
+          <p>Ative o JavaScript para selecionar perfis interativos.</p>
         </div>
-      </section>
+      </noscript>
+
+      <div id="profilesGrid" class="profiles-grid" role="list" aria-live="polite"></div>
+
+      <div class="actions">
+        <button id="skipBtn" class="btn ghost">Pular</button>
+      </div>
+    </section>
+
+    <!-- Modal para gerenciar perfis -->
+    <div id="modal" class="modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="modalTitle">
+      <div class="modal-panel" role="document">
+        <header class="modal-header">
+          <h2 id="modalTitle">Gerenciar perfis</h2>
+          <button id="closeModal" class="btn icon" aria-label="Fechar">✕</button>
+        </header>
+
+        <form id="profileForm" class="profile-form" novalidate>
+          <input type="hidden" id="profileId" />
+          <label>
+            Nome
+            <input id="profileName" name="name" required maxlength="30" />
+          </label>
+          <label>
+            Avatar (caminho em assets)
+            <input id="profileAvatar" name="avatar" placeholder="assets/nome.jpg" />
+          </label>
+          <div class="form-actions">
+            <button type="submit" class="btn primary">Salvar</button>
+            <button type="button" id="deleteProfile" class="btn ghost danger">Remover</button>
+          </div>
+        </form>
+
+        <div class="modal-footer">
+          <button id="addNew" class="btn">Adicionar novo perfil</button>
+        </div>
+      </div>
     </div>
   </main>
 
-  <script src="app.js"></script>
+  <script type="module" src="app.js"></script>
 </body>
 </html>
