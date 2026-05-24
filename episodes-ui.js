@@ -1,4 +1,4 @@
-// episodes-ui.js - Versão Anti-Falhas com Verificação Imediata
+// episodes-ui.js - Versão com Vinheta (Intro -> Episódio)
 document.addEventListener('DOMContentLoaded', () => {
   const playerSection = document.getElementById('player');
   if (!playerSection) return;
@@ -26,7 +26,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const injectDocumentaryUI = () => {
     if (isDocUiInitialized) return;
 
-    // Criar Navegação de Abas
     const tabsNav = document.createElement('div');
     tabsNav.className = 'doc-tabs-nav';
     tabsNav.setAttribute('role', 'tablist');
@@ -44,7 +43,6 @@ document.addEventListener('DOMContentLoaded', () => {
     tabsNav.appendChild(tabDoc);
     tabsNav.appendChild(tabPlayer);
 
-    // Criar Painel do Documentário
     const docPanel = document.createElement('div');
     docPanel.id = 'documentaryPanel';
     docPanel.setAttribute('role', 'tabpanel');
@@ -66,7 +64,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const originalVideoWrapper = playerSection.querySelector('.video-wrapper');
     const originalTitle = document.getElementById('playerTitle');
 
-    // Injetar Área de Transcrição
     const transcriptSection = document.createElement('div');
     transcriptSection.className = 'transcript-section';
     transcriptSection.hidden = true;
@@ -90,6 +87,11 @@ document.addEventListener('DOMContentLoaded', () => {
       originalVideoWrapper.hidden = true;
       transcriptSection.hidden = true;
       originalTitle.style.display = 'none';
+      
+      // Se houver um vídeo tocando, pausa ao voltar para a lista
+      const videoElem = originalVideoWrapper.querySelector('video');
+      if(videoElem) videoElem.pause();
+      
       renderEpisodesList(episodesData);
     };
 
@@ -168,6 +170,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   };
 
+  // --- LÓGICA NOVA: INTRO -> EPISÓDIO ---
   const playEpisode = (ep) => {
     saveProgress(ep.id);
     const originalVideoWrapper = playerSection.querySelector('.video-wrapper');
@@ -176,27 +179,40 @@ document.addEventListener('DOMContentLoaded', () => {
     const transcriptSection = document.querySelector('.transcript-section');
     const transcriptText = document.getElementById('transcriptText');
 
+    // 1. Prepara a tela (Esconde a lista, mostra o player)
     document.getElementById('documentaryPanel').hidden = true;
     originalVideoWrapper.hidden = false;
+    transcriptSection.hidden = true; // Esconde a transcrição durante a intro
     
+    // 2. Estado de "Apresentação" (Intro)
     originalTitle.style.display = 'block';
-    originalTitle.innerHTML = `Documentário: <span>${ep.title}</span>`;
-    
-    videoElem.src = ep.video;
+    originalTitle.innerHTML = `Apresentando...`;
+    videoElem.src = 'assets/intro.mp4'; // Força a intro primeiro
     videoElem.play().catch(e => console.warn("Autoplay bloqueado", e));
 
-    transcriptSection.hidden = false;
-    transcriptText.innerText = ep.transcript;
-    transcriptText.classList.remove('visible');
+    // 3. Quando a Intro terminar, injeta o episódio escolhido
+    videoElem.onended = () => {
+      // Atualiza metadados
+      originalTitle.innerHTML = `Documentário: <span>${ep.title}</span>`;
+      
+      // Revela transcrição
+      transcriptSection.hidden = false;
+      transcriptText.innerText = ep.transcript;
+      transcriptText.classList.remove('visible'); // Começa fechada
+      
+      // Carrega e toca o vídeo real do episódio
+      videoElem.src = ep.video;
+      videoElem.play().catch(e => console.warn("Autoplay bloqueado no episódio", e));
+
+      // Limpa o evento para não entrar em loop infinito quando o ep acabar
+      videoElem.onended = null; 
+    };
   };
 
-  // --- GARANTIA DE INJEÇÃO ---
-  // 1. Se o player já estiver visível no momento que este script rodar:
   if (!playerSection.hidden) {
     injectDocumentaryUI();
   }
 
-  // 2. Se ele abrir depois (fluxo normal), o Observer garante a ativação:
   const observer = new MutationObserver((mutations) => {
     mutations.forEach((mutation) => {
       if (mutation.type === 'attributes' && mutation.attributeName === 'hidden') {
