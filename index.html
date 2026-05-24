@@ -7,11 +7,10 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <!-- Intro com vídeo -->
-  <div id="intro" class="intro-screen active" aria-hidden="false">
+  <!-- Intro (se já tiver) -->
+  <div id="intro" class="intro-screen" aria-hidden="true" style="display:none;">
     <video id="introVideo" autoplay muted playsinline preload="auto" poster="assets/intro-poster.jpg">
       <source src="assets/intro.mp4" type="video/mp4">
-      Seu navegador não suporta vídeo.
     </video>
     <div class="intro-overlay">
       <div class="brand-placeholder">NETFLIX STYLE</div>
@@ -20,10 +19,8 @@
     </div>
   </div>
 
-  <!-- Splash / Perfis (mantém seu fluxo) -->
+  <!-- Splash / tela inicial simples -->
   <div id="splash" class="overlay-screen">
-    <div class="cinema-bars top"></div>
-    <div class="cinema-bars bottom"></div>
     <div class="splash-content">
       <h1 class="splash-title">CARTOON NETWORK</h1>
       <p class="splash-sub">Ciclo de vida, declínio e reinvenção</p>
@@ -31,33 +28,42 @@
     </div>
   </div>
 
-  <!-- Perfis -->
-  <div id="profiles" class="overlay-screen" aria-hidden="true">
-    <h2 class="section-title">Quem está assistindo?</h2>
-    <div class="profiles-grid" role="list">
-      <button class="profile-card" data-profile="Flavio" role="listitem">Flavio</button>
-      <button class="profile-card" data-profile="Convidado" role="listitem">Convidado</button>
-      <button class="profile-card" data-profile="Estudante" role="listitem">Estudante</button>
+  <!-- Perfis com fundo único -->
+  <section id="profiles" class="profiles-screen" aria-hidden="true">
+    <div class="profiles-overlay"></div>
+    <div class="profiles-inner" role="region" aria-label="Seleção de perfis">
+      <h2 class="profiles-title">Quem está assistindo?</h2>
+
+      <div class="profiles-grid" role="list">
+        <button class="profile-card" data-profile="Flavio" role="listitem" aria-label="Flavio">
+          <div class="avatar">F</div>
+          <span class="profile-name">Flavio</span>
+        </button>
+
+        <button class="profile-card" data-profile="Convidado" role="listitem" aria-label="Convidado">
+          <div class="avatar">C</div>
+          <span class="profile-name">Convidado</span>
+        </button>
+
+        <button class="profile-card" data-profile="Estudante" role="listitem" aria-label="Estudante">
+          <div class="avatar">E</div>
+          <span class="profile-name">Estudante</span>
+        </button>
+      </div>
+
+      <div class="profiles-actions">
+        <button id="skipProfiles" class="btn ghost">Pular</button>
+      </div>
     </div>
-    <button id="skipProfiles" class="btn ghost">Pular</button>
-  </div>
+  </section>
 
-  <!-- Player principal (capítulos) -->
-  <main id="player" class="hidden" tabindex="-1">
-    <audio id="bgAudio" loop preload="auto">
-      <source src="assets/trailer.mp3" type="audio/mpeg" />
-    </audio>
-
+  <!-- Player placeholder -->
+  <main id="player" class="hidden" tabindex="-1" aria-hidden="true">
     <nav class="topbar">
       <div class="logo-small">CN DOC</div>
-      <div class="controls">
-        <button id="toggleAudio" class="icon-btn" aria-pressed="false" title="Ativar/Desativar áudio">🔊</button>
-        <button id="openTranscript" class="icon-btn" title="Abrir transcrição">📝</button>
-      </div>
     </nav>
 
     <div id="chapters" class="chapters">
-      <!-- Capítulos: edite textos conforme seu conteúdo -->
       <section class="chapter" data-index="0" style="background-image:url('assets/bg1.jpg')">
         <div class="chapter-overlay">
           <h2 class="chapter-ep">1 • Declínio Avançado</h2>
@@ -65,31 +71,8 @@
           <p class="chapter-text">A Cartoon Network foi uma das maiores marcas infantis do mundo entre 1998 e 2014...</p>
         </div>
       </section>
-      <!-- repita para os demais capítulos -->
-    </div>
-
-    <div class="player-ui">
-      <button id="prevBtn" class="nav-btn">◀</button>
-      <div class="progress-wrap" aria-hidden="true">
-        <div id="progress" class="progress"></div>
-      </div>
-      <button id="nextBtn" class="nav-btn">▶</button>
     </div>
   </main>
-
-  <!-- Transcrição modal -->
-  <aside id="transcriptModal" class="modal" aria-hidden="true" role="dialog" aria-label="Transcrição">
-    <div class="modal-content">
-      <header>
-        <h3>Transcrição</h3>
-        <div class="modal-actions">
-          <button id="downloadTranscript" class="btn">Baixar .txt</button>
-          <button id="closeTranscript" class="btn ghost">Fechar</button>
-        </div>
-      </header>
-      <div class="transcript-body" id="transcriptBody"></div>
-    </div>
-  </aside>
 
   <script src="app.js"></script>
 </body>
