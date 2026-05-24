@@ -1,6 +1,22 @@
 [
-  {"id":"flavio","name":"Flavio","avatar":"assets/flavio.jpg"},
-  {"id":"augusto","name":"Augusto","avatar":"assets/augusto.jpg"},
-  {"id":"juan","name":"Juan","avatar":"assets/juan.jpg"},
-  {"id":"ricardo","name":"Ricardo","avatar":"assets/ricardo.jpg"}
+  {
+    "id": "flavio",
+    "name": "Flavio",
+    "avatar": "assets/flavio.jpg"
+  },
+  {
+    "id": "augusto",
+    "name": "Augusto",
+    "avatar": "assets/augusto.jpg"
+  },
+  {
+    "id": "juan",
+    "name": "Juan",
+    "avatar": "assets/juan.jpg"
+  },
+  {
+    "id": "ricardo",
+    "name": "Ricardo",
+    "avatar": "assets/ricardo.jpg"
+  }
 ]
