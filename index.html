@@ -1,46 +1,36 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cartoon Doc</title>
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <!-- Intro estilo Netflix -->
-  <div id="introWrap" class="intro-wrap" aria-hidden="true">
-    <video id="introVideo" class="intro-video" playsinline muted preload="auto" poster="assets/intro-poster.jpg">
+
+  <div id="introContainer">
+    <video id="introVideo" poster="assets/intro-poster.jpg" playsinline muted preload="auto">
       <source src="assets/intro.mp4" type="video/mp4">
     </video>
-    <div class="intro-skip">
-      <button id="skipIntro" class="btn ghost">Pular intro</button>
+    <div class="intro-controls">
+      <button id="startIntroBtn" hidden>Iniciar Intro</button>
+      <button id="skipIntroBtn">Pular Intro</button>
     </div>
   </div>
 
-  <!-- Seção de perfis -->
-  <section id="profiles" class="profiles-screen" aria-hidden="true" style="display:none">
-    <div class="profiles-inner" role="region" aria-label="Seleção de perfis">
-      <h2 class="profiles-title">Quem está assistindo?</h2>
-      <div id="profilesGrid" class="profiles-grid" role="list"></div>
-      <div class="profiles-actions">
-        <button id="skipProfiles" class="btn ghost">Pular</button>
-      </div>
-    </div>
+  <section id="profiles" hidden>
+    <h1>Quem está assistindo?</h1>
+    <div id="profilesGrid" role="list"></div>
   </section>
 
-  <!-- Player -->
-  <main id="player" class="hidden" tabindex="-1" aria-hidden="true">
-    <nav class="topbar">
-      <div class="logo-small">CN DOC</div>
-    </nav>
-    <div id="chapters" class="chapters">
-      <section class="chapter" data-index="0" style="background-image:url('assets/bg1.jpg')">
-        <div class="chapter-overlay">
-          <h2 class="chapter-ep">1 • Declínio Avançado</h2>
-          <h3 class="chapter-title">No mercado televisivo: DECLÍNIO AVANÇADO</h3>
-          <p class="chapter-text">A Cartoon Network foi uma das maiores marcas infantis do mundo entre 1998 e 2014...</p>
-        </div>
-      </section>
+  <main id="player" hidden>
+    <button id="backToProfilesBtn">Voltar aos Perfis</button>
+    <h2 id="playerTitle">Assistindo como: <span></span></h2>
+    <div class="video-wrapper">
+      <video controls poster="assets/intro-poster.jpg">
+        <source src="assets/intro.mp4" type="video/mp4">
+        Seu navegador não suporta a tag de vídeo.
+      </video>
     </div>
   </main>
 
