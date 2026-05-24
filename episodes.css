@@ -1,10 +1,143 @@
-.episodes-panel{display:flex;gap:20px;padding:18px;color:#fff;background:rgba(0,0,0,0.6);border-radius:10px}
-.episodes-list{width:320px;max-height:64vh;overflow:auto;padding:8px;border-right:1px solid rgba(255,255,255,0.04)}
-.episode-item{display:flex;gap:10px;padding:10px;border-radius:8px;cursor:pointer}
-.episode-item:hover{background:rgba(255,255,255,0.05)}
-.ep-thumb{width:84px;height:56px;border-radius:6px;background:#111;display:flex;align-items:center;justify-content:center;color:#fff}
-.ep-meta{flex:1;display:flex;flex-direction:column;gap:6px}
-.ep-title{font-weight:700;font-size:14px}
-.ep-summary{font-size:12px;color:rgba(255,255,255,0.8)}
-.episodes-player{flex:1;display:flex;flex-direction:column;gap:12px;padding:8px}
-.transcript-panel{max-height:36vh;overflow:auto;padding:12px;background:rgba(0,0,0,0.45);border-radius:8px}
+/* Container de Abas Injetado */
+.doc-tabs-nav {
+  display: flex;
+  gap: 15px;
+  margin: 15px 0;
+  border-bottom: 1px solid #333;
+  padding-bottom: 10px;
+}
+
+.doc-tab-btn {
+  background: transparent;
+  border: none;
+  color: grey;
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: color 0.3s, border-bottom 0.3s;
+}
+
+.doc-tab-btn.active {
+  color: white;
+  border-bottom: 3px solid var(--focus-ring, #0071eb);
+}
+
+.doc-tab-btn:focus {
+  outline: 2px solid var(--focus-ring, #0071eb);
+}
+
+/* Área do Documentário */
+#documentaryPanel {
+  animation: fadeIn 0.4s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.doc-search-bar {
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid #444;
+  background: #222;
+  color: white;
+  width: 100%;
+  max-width: 400px;
+  font-size: 1rem;
+}
+
+.doc-search-bar:focus {
+  outline: 2px solid var(--focus-ring, #0071eb);
+}
+
+.episodes-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-height: 60vh;
+  overflow-y: auto;
+  padding-right: 10px;
+}
+
+/* Scrollbar customizada para a lista */
+.episodes-list::-webkit-scrollbar { width: 8px; }
+.episodes-list::-webkit-scrollbar-thumb { background: #555; border-radius: 4px; }
+
+/* Cards de Episódio */
+.episode-card {
+  display: flex;
+  background: #1e1e1e;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s, background 0.2s;
+  border: 1px solid transparent;
+}
+
+.episode-card:hover, .episode-card:focus {
+  background: #2a2a2a;
+  transform: translateX(5px);
+  outline: none;
+  border-color: var(--focus-ring, #0071eb);
+}
+
+.episode-thumb-wrapper {
+  width: 160px;
+  min-width: 160px;
+  background: #333;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.episode-thumb-wrapper::after {
+  content: "▶";
+  font-size: 2rem;
+  color: rgba(255,255,255,0.5);
+  position: absolute;
+}
+
+.episode-thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.7;
+}
+
+.episode-info {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+}
+
+.episode-title { font-size: 1.1rem; color: #fff; margin: 0;}
+.episode-meta { font-size: 0.85rem; color: #aaa; }
+.episode-summary { font-size: 0.95rem; color: #ccc; margin-top: 5px; line-height: 1.4; }
+.episode-progress { color: #4caf50; font-size: 0.8rem; font-weight: bold; margin-top: 5px;}
+
+/* Transcrição no Player */
+.transcript-section {
+  margin-top: 20px;
+  background: #1a1a1a;
+  border-radius: 8px;
+  padding: 15px;
+  border: 1px solid #333;
+}
+
+.transcript-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.transcript-content {
+  margin-top: 15px;
+  line-height: 1.6;
+  color: #ddd;
+  font-size: 1rem;
+  display: none;
+}
+.transcript-content.visible { display: block; }
