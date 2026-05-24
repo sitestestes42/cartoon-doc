@@ -3,21 +3,60 @@
     "id": "ep1-declinio-avancado",
     "title": "No mercado televisivo: Declínio Avançado",
     "duration": "08:30",
-    "summary": "A Cartoon Network dominou a TV paga entre 1998–2014; hoje enfrenta queda de audiência e redução de produções originais.",
-    "transcript": "A Cartoon Network foi uma das maiores marcas infantis do mundo entre os anos 1998 e 2014... (texto completo da seção)",
+    "summary": "A Cartoon Network dominou a TV paga entre 1998–2014; hoje enfrenta queda de audiência, perda de relevância e redução de produções originais.",
+    "transcript": "A Cartoon Network foi uma das maiores marcas infantis do mundo entre os anos 1998 e 2014. Nesse período: dominava audiência infantil em TV paga; possuía identidade visual extremamente forte; tinha programação autoral consistente; comandava cultura de internet infantil; influenciava games, memes e fandoms. Hoje o cenário é diferente. O canal sofre com: queda da TV por assinatura; perda de relevância cultural; redução drástica de produções originais; dependência de poucas IPs; redução de horários dedicados ao canal; migração do público infantil para YouTube, TikTok e streaming. A própria Warner reconheceu implicitamente esse declínio ao reduzir investimentos na estrutura independente da marca. O início do declínio estrutural ocorreu aproximadamente entre 2016 e 2018. Esse período marca: queda forte da audiência da TV paga; fim gradual da “era de ouro” criativa do CN; excesso de dependência de Teen Titans Go!; cancelamentos de projetos experimentais; perda de espaço competitivo para streaming e YouTube. Mas o declínio se tornou oficialmente evidente em 2022, após a fusão Warner + Discovery.",
     "thumbnail": "assets/episodes/ep1.jpg",
     "video": "assets/intro.mp4",
     "order": 1
   },
   {
-    "id": "ep2-absorpcao-corporativa",
+    "id": "ep2-fase-absorcao",
     "title": "No streaming: Fase de Absorção Corporativa",
-    "duration": "06:40",
-    "summary": "O CN deixou de ser ecossistema próprio e virou biblioteca dentro do Max; fechamento do site e do Boomerang são sinais.",
-    "transcript": "No setor digital, a Cartoon Network deixou de existir como ecossistema próprio... (texto completo da seção)",
+    "duration": "05:15",
+    "summary": "O CN deixou de ser ecossistema e virou biblioteca dentro do Max; fechamento do site e do Boomerang são sinais.",
+    "transcript": "No setor digital, a Cartoon Network deixou de existir como ecossistema próprio e passou a funcionar apenas como “biblioteca de conteúdo” do Max. Isso significa que: a marca perdeu autonomia digital; deixou de ser plataforma; virou apenas uma seção dentro do streaming. Os sinais mais fortes disso foram: Fechamento do site oficial; Em 2024, a Warner encerrou praticamente todo o portal CartoonNetwork.com e redirecionou usuários ao Max. Esse movimento foi extremamente simbólico porque: o site era parte essencial da experiência CN nos anos 2000; possuía jogos, episódios, interação e comunidade; representava independência digital da marca. Encerramento do streaming Boomerang; A Warner também encerrou o serviço próprio do Boomerang em 2024 para centralizar tudo no Max. Isso reforça que: a empresa abandonou ecossistemas especializados; priorizou consolidação financeira; reduziu diversidade de marcas.",
     "thumbnail": "assets/episodes/ep2.jpg",
     "video": "assets/intro.mp4",
     "order": 2
+  },
+  {
+    "id": "ep3-erosao-identidade",
+    "title": "Culturalmente: Fase de Erosão de Identidade",
+    "duration": "06:40",
+    "summary": "Perda de identidade geracional; antes o CN era inovador e autoral; hoje perdeu experimentação e curadoria.",
+    "transcript": "Culturalmente, o Cartoon Network vive algo ainda mais crítico: perda de identidade geracional. Entre 1998–2014, o CN era: inovador; irreverente; experimental; “estranho” de propósito; artisticamente autoral. Produções como: Adventure Time; Regular Show; The Amazing World of Gumball; Steven Universe formaram uma identidade cultural extremamente forte. Hoje a marca sofre porque: perdeu experimentação; perdeu curadoria; perdeu conexão com infância contemporânea; perdeu “evento cultural”. A Cartoon Network não dita mais tendências da animação ocidental como fazia antes.",
+    "thumbnail": "assets/episodes/ep3.jpg",
+    "video": "assets/intro.mp4",
+    "order": 3
+  },
+  {
+    "id": "ep4-ano-chave",
+    "title": "O ano-chave: 2022",
+    "duration": "04:50",
+    "summary": "2022 foi o ponto de ruptura após a fusão Warner + Discovery; integração forçada e cortes massivos.",
+    "transcript": "Embora os sintomas viessem desde 2016, o ponto de ruptura foi 2022, após a fusão que criou a Warner Bros. Discovery. Esse foi o momento em que: começou a integração forçada das divisões; ocorreram cortes massivos; houve fusão entre Cartoon Network Studios e Warner Bros. Animation; projetos foram cancelados; estruturas criativas perderam independência. A partir daí, a marca deixou de ser prioridade estratégica e virou um ativo secundário dentro do conglomerado.",
+    "thumbnail": "assets/episodes/ep4.jpg",
+    "video": "assets/intro.mp4",
+    "order": 4
+  },
+  {
+    "id": "ep5-erros-warner",
+    "title": "Principais erros da Warner Bros. Discovery",
+    "duration": "09:10",
+    "summary": "Transformar marcas em catálogo, foco em curto prazo, destruição do ecossistema digital, dependência de poucas franquias, falta de estratégia infantil moderna, perda de preservação histórica.",
+    "transcript": "1. Transformar marcas em “conteúdo de catálogo”: O maior erro estratégico foi tratar Cartoon Network apenas como IP e não como experiência cultural. 2. Excesso de foco financeiro de curto prazo: gestão marcada por cortes agressivos, cancelamentos e remoções de conteúdo. 3. Destruição do ecossistema digital clássico: fechamento do site do Cartoon Network e remoção de jogos e interações. 4. Dependência excessiva de poucas franquias: programação concentrada em Teen Titans Go! e reprises. 5. Falta de estratégia infantil moderna: atraso na adaptação a vídeos curtos, creators e games sociais. 6. Perda de preservação histórica: remoção e delistagem de títulos antigos.",
+    "thumbnail": "assets/episodes/ep5.jpg",
+    "video": "assets/intro.mp4",
+    "order": 5
+  },
+  {
+    "id": "ep6-estagio-atual",
+    "title": "Em resumo: estágio atual e conclusões",
+    "duration": "03:20",
+    "summary": "Síntese do diagnóstico: TV — Declínio avançado; Streaming — Absorção; Cultura — Erosão; Marca — Sobrevivência via nostalgia; Estratégia — Consolidação no Max.",
+    "transcript": "Em resumo: A Cartoon Network está hoje em: TV — Declínio avançado; Streaming — Absorção corporativa; Cultura — Erosão de identidade; Marca — Sobrevivência via nostalgia; Estratégia atual — Consolidação dentro do Max. O ciclo atual começou lentamente entre 2016–2018, mas entrou em fase crítica em 2022 após a criação da Warner Bros. Discovery. O principal problema não foi apenas queda de audiência — foi a perda gradual daquilo que fazia a Cartoon Network parecer única culturalmente.",
+    "thumbnail": "assets/episodes/ep6.jpg",
+    "video": "assets/intro.mp4",
+    "order": 6
   }
-  // continue com os episódios 3 a 6
 ]
