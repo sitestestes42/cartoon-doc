@@ -1,7 +1,6 @@
-// episodes-ui.js - Versão com Vinheta (Intro -> Episódio)
-document.addEventListener('DOMContentLoaded', () => {
-  const playerSection = document.getElementById('player');
-  if (!playerSection) return;
+// episodes-ui.js - Versão Blindada com Logs de Diagnóstico
+(() => {
+  console.log("[Cartoon Doc] Script episodes-ui.js foi carregado com sucesso!");
 
   let episodesData = [];
   let isDocUiInitialized = false;
@@ -15,17 +14,29 @@ document.addEventListener('DOMContentLoaded', () => {
   const fetchEpisodes = async () => {
     try {
       const res = await fetch('episodes.json');
-      if (!res.ok) throw new Error('Erro ao buscar episodes.json');
+      if (!res.ok) throw new Error('Não encontrou o arquivo episodes.json na raiz');
       episodesData = await res.json();
+      console.log("[Cartoon Doc] Episódios carregados do JSON:", episodesData.length);
       renderEpisodesList(episodesData);
     } catch (err) {
-      console.error("Erro ao carregar episódios:", err);
+      console.error("[Cartoon Doc] Erro crítico ao buscar o JSON:", err);
     }
   };
 
-  const injectDocumentaryUI = () => {
-    if (isDocUiInitialized) return;
+  const injectDocumentaryUI = (playerSection) => {
+    if (isDocUiInitialized || !playerSection) return;
+    console.log("[Cartoon Doc] Iniciando a injeção da interface do Documentário...");
 
+    const originalVideoWrapper = playerSection.querySelector('.video-wrapper');
+    const backBtn = document.getElementById('backToProfilesBtn') || playerSection.querySelector('button');
+    const originalTitle = document.getElementById('playerTitle') || playerSection.querySelector('h2') || playerSection.querySelector('h1');
+
+    if (!originalVideoWrapper || !backBtn) {
+      console.warn("[Cartoon Doc] Elementos estruturais do player não foram encontrados para a injeção.");
+      return;
+    }
+
+    // Criar abas
     const tabsNav = document.createElement('div');
     tabsNav.className = 'doc-tabs-nav';
     tabsNav.setAttribute('role', 'tablist');
@@ -43,6 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
     tabsNav.appendChild(tabDoc);
     tabsNav.appendChild(tabPlayer);
 
+    // Criar painel da lista
     const docPanel = document.createElement('div');
     docPanel.id = 'documentaryPanel';
     docPanel.setAttribute('role', 'tabpanel');
@@ -51,19 +63,15 @@ document.addEventListener('DOMContentLoaded', () => {
     searchBar.type = 'text';
     searchBar.className = 'doc-search-bar';
     searchBar.placeholder = 'Buscar episódio ou transcrição...';
-    searchBar.setAttribute('aria-label', 'Buscar episódios');
     
     const episodesList = document.createElement('div');
     episodesList.className = 'episodes-list';
     episodesList.setAttribute('role', 'list');
-    episodesList.setAttribute('aria-live', 'polite');
 
     docPanel.appendChild(searchBar);
     docPanel.appendChild(episodesList);
 
-    const originalVideoWrapper = playerSection.querySelector('.video-wrapper');
-    const originalTitle = document.getElementById('playerTitle');
-
+    // Criar seção de transcrição
     const transcriptSection = document.createElement('div');
     transcriptSection.className = 'transcript-section';
     transcriptSection.hidden = true;
@@ -72,25 +80,25 @@ document.addEventListener('DOMContentLoaded', () => {
         <h3>Transcrição</h3>
         <button id="toggleTranscriptBtn">Mostrar / Ocultar</button>
       </div>
-      <div id="transcriptText" class="transcript-content" aria-live="polite"></div>
+      <div id="transcriptText" class="transcript-content"></div>
     `;
-    originalVideoWrapper.parentNode.insertBefore(transcriptSection, originalVideoWrapper.nextSibling);
 
-    const backBtn = document.getElementById('backToProfilesBtn');
+    // Inserir elementos no DOM usando nós vizinhos estáveis
+    originalVideoWrapper.parentNode.insertBefore(transcriptSection, originalVideoWrapper.nextSibling);
     backBtn.insertAdjacentElement('afterend', tabsNav);
     tabsNav.insertAdjacentElement('afterend', docPanel);
 
+    // Funções de alternância
     const showDocumentary = () => {
       tabDoc.classList.add('active');
       tabPlayer.classList.remove('active');
       docPanel.hidden = false;
       originalVideoWrapper.hidden = true;
       transcriptSection.hidden = true;
-      originalTitle.style.display = 'none';
+      if (originalTitle) originalTitle.style.display = 'none';
       
-      // Se houver um vídeo tocando, pausa ao voltar para a lista
       const videoElem = originalVideoWrapper.querySelector('video');
-      if(videoElem) videoElem.pause();
+      if (videoElem) videoElem.pause();
       
       renderEpisodesList(episodesData);
     };
@@ -100,7 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
       tabDoc.classList.remove('active');
       docPanel.hidden = true;
       originalVideoWrapper.hidden = false;
-      originalTitle.style.display = 'block';
+      if (originalTitle) originalTitle.style.display = 'block';
       transcriptSection.hidden = true;
     };
 
@@ -123,6 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
     showDocumentary();
     fetchEpisodes();
     isDocUiInitialized = true;
+    console.log("[Cartoon Doc] Interface do Documentário injetada com sucesso!");
   };
 
   const renderEpisodesList = (data) => {
@@ -136,9 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const isWatched = progressMap[ep.id] ? 'Visto' : '';
       const card = document.createElement('div');
       card.className = 'episode-card';
-      card.setAttribute('role', 'listitem');
       card.setAttribute('tabindex', '0');
-      card.setAttribute('data-episode-id', ep.id);
 
       card.innerHTML = `
         <div class="episode-thumb-wrapper">
@@ -157,12 +164,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
           playEpisode(ep);
-        } else if (e.key === 'ArrowDown') {
-          e.preventDefault();
-          if (card.nextElementSibling) card.nextElementSibling.focus();
-        } else if (e.key === 'ArrowUp') {
-          e.preventDefault();
-          if (card.previousElementSibling) card.previousElementSibling.focus();
         }
       });
 
@@ -170,58 +171,77 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   };
 
-  // --- LÓGICA NOVA: INTRO -> EPISÓDIO ---
   const playEpisode = (ep) => {
+    console.log("[Cartoon Doc] Episódio selecionado:", ep.title);
     saveProgress(ep.id);
+    
+    const playerSection = document.getElementById('player');
     const originalVideoWrapper = playerSection.querySelector('.video-wrapper');
-    const originalTitle = document.getElementById('playerTitle');
+    const originalTitle = document.getElementById('playerTitle') || playerSection.querySelector('h2') || playerSection.querySelector('h1');
     const videoElem = originalVideoWrapper.querySelector('video');
     const transcriptSection = document.querySelector('.transcript-section');
     const transcriptText = document.getElementById('transcriptText');
 
-    // 1. Prepara a tela (Esconde a lista, mostra o player)
     document.getElementById('documentaryPanel').hidden = true;
     originalVideoWrapper.hidden = false;
-    transcriptSection.hidden = true; // Esconde a transcrição durante a intro
+    transcriptSection.hidden = true; 
     
-    // 2. Estado de "Apresentação" (Intro)
-    originalTitle.style.display = 'block';
-    originalTitle.innerHTML = `Apresentando...`;
-    videoElem.src = 'assets/intro.mp4'; // Força a intro primeiro
-    videoElem.play().catch(e => console.warn("Autoplay bloqueado", e));
+    if (originalTitle) {
+      originalTitle.style.display = 'block';
+      originalTitle.innerHTML = `Apresentando...`;
+    }
+    
+    console.log("[Cartoon Doc] Iniciando reprodução da Intro de segurança...");
+    videoElem.src = 'assets/intro.mp4'; 
+    videoElem.play().catch(e => console.warn("Autoplay bloqueado na intro:", e));
 
-    // 3. Quando a Intro terminar, injeta o episódio escolhido
     videoElem.onended = () => {
-      // Atualiza metadados
-      originalTitle.innerHTML = `Documentário: <span>${ep.title}</span>`;
+      console.log("[Cartoon Doc] Intro finalizada. Carregando conteúdo real do episódio.");
+      if (originalTitle) {
+        originalTitle.innerHTML = `Documentário: <span>${ep.title}</span>`;
+      }
       
-      // Revela transcrição
       transcriptSection.hidden = false;
       transcriptText.innerText = ep.transcript;
-      transcriptText.classList.remove('visible'); // Começa fechada
+      transcriptText.classList.remove('visible'); 
       
-      // Carrega e toca o vídeo real do episódio
       videoElem.src = ep.video;
-      videoElem.play().catch(e => console.warn("Autoplay bloqueado no episódio", e));
-
-      // Limpa o evento para não entrar em loop infinito quando o ep acabar
+      videoElem.play().catch(e => console.warn("Autoplay bloqueado no vídeo do episódio:", e));
       videoElem.onended = null; 
     };
   };
 
-  if (!playerSection.hidden) {
-    injectDocumentaryUI();
-  }
+  // --- HOOK DE EXECUÇÃO ULTRA-SEGURO ---
+  const checkAndHook = () => {
+    const playerSection = document.getElementById('player');
+    if (!playerSection) return;
 
-  const observer = new MutationObserver((mutations) => {
-    mutations.forEach((mutation) => {
-      if (mutation.type === 'attributes' && mutation.attributeName === 'hidden') {
-        if (!playerSection.hidden) {
-          injectDocumentaryUI();
-        }
-      }
-    });
-  });
+    // Verifica se o player está visível no DOM (por atributo hidden, classe ou estilo computado)
+    const isPlayerVisible = !playerSection.hasAttribute('hidden') && 
+                            !playerSection.classList.contains('hidden') && 
+                            window.getComputedStyle(playerSection).display !== 'none';
 
-  observer.observe(playerSection, { attributes: true });
-});
+    if (isPlayerVisible && !isDocUiInitialized) {
+      injectDocumentaryUI(playerSection);
+    } else if (!isPlayerVisible && isDocUiInitialized) {
+      // Se voltou pra tela de perfis, permite reinicializar depois
+      isDocUiInitialized = false;
+      const tabs = document.querySelector('.doc-tabs-nav');
+      const panel = document.getElementById('documentaryPanel');
+      const trans = document.querySelector('.transcript-section');
+      if(tabs) tabs.remove();
+      if(panel) panel.remove();
+      if(trans) trans.remove();
+      console.log("[Cartoon Doc] Usuário voltou aos perfis. Interface resetada.");
+    }
+  };
+
+  // 1. Executa imediatamente e liga o observador de mutação genérico
+  checkAndHook();
+  const observer = new MutationObserver(checkAndHook);
+  observer.observe(document.body, { attributes: true, subtree: true, childList: true });
+
+  // 2. Fallback de contingência (Verifica a tela a cada 300ms caso o observer falhe)
+  setInterval(checkAndHook, 300);
+
+})();
