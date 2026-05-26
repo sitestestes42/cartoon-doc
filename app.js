@@ -129,14 +129,9 @@ document.addEventListener('DOMContentLoaded', () => {
     localStorage.removeItem('viewer');
   });
 
-  // --- Service Worker Registration ---
+  // --- Service Worker Desativado para Atualizar o Cache ---
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-      navigator.serviceWorker.register('service-worker.js')
-        .then(reg => console.log('SW registrado com sucesso:', reg.scope))
-        .catch(err => console.error('Erro ao registrar SW:', err));
-        
-      /* Snippet para debug - Desregistrar SW:
       navigator.serviceWorker.getRegistrations().then(function(registrations) {
         for(let registration of registrations) {
           registration.unregister();
@@ -145,7 +140,7 @@ document.addEventListener('DOMContentLoaded', () => {
       caches.keys().then(keys => {
         keys.forEach(key => caches.delete(key));
       });
-      */
+      console.log("[Cartoon Doc] Service Worker e Caches limpos com sucesso.");
     });
   }
 });
