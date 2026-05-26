@@ -147,9 +147,10 @@
     localStorage.setItem('episodes_progress', JSON.stringify(progress));
   };
 
+  // --- BUSCA DOS EPISÓDIOS COM ANULAÇÃO DE CACHE COMPLETA ---
   const fetchEpisodes = async () => {
     try {
-      const res = await fetch('episodes.json');
+      const res = await fetch('episodes.json', { cache: 'no-store' });
       if (!res.ok) throw new Error('Não encontrou episodes.json');
       episodesData = await res.json();
       renderEpisodesList(episodesData);
