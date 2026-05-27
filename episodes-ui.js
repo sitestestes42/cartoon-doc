@@ -1,4 +1,4 @@
-// episodes-ui.js - Versão Forçada com Sobrescrita de CSS (!important)
+// episodes-ui.js - Versão Corrigida (Tratamento de Erros de Imagem)
 (() => {
   console.log("[Cartoon Doc] Módulo Dashboard Inicial ativado com força total de CSS.");
 
@@ -26,7 +26,7 @@
       .nf-banner {
         position: relative !important;
         min-height: 400px !important;
-        background: linear-gradient(77deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.3) 100%), url('painel.jpg') no-repeat center center !important;
+        background: linear-gradient(77deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.3) 100%), url('assets/painel.jpg') no-repeat center center !important;
         background-size: cover !important;
         border-radius: 8px !important;
         padding: 60px 40px !important;
@@ -95,6 +95,9 @@
         grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)) !important;
         gap: 20px !important;
         margin-bottom: 40px !important;
+      }
+      .nf-row-fallback-bg {
+        background-color: #222 !important;
       }
       .nf-card {
         background: #141414 !important;
@@ -183,12 +186,12 @@
       }, { capture: true });
     }
 
-    // --- CRIAÇÃO DO PAINEL DASHBOARD NETFLIX ---
+    // --- CRIAÇÃO DO PAINEL DASHBOARD NETFLIX (Caminhos Corrigidos para assets/) ---
     const dashboardPanel = document.createElement('div');
     dashboardPanel.id = 'netflixDashboardPanel';
     dashboardPanel.className = 'netflix-dashboard';
     dashboardPanel.innerHTML = `
-      <div class="nf-banner">
+      <div class="nf-banner" onerror="this.classList.add('nf-row-fallback-bg')">
         <h1 class="nf-title">Cartoon Network:</h1>
         <div class="nf-subtitle">Declínio e Reinvenção</div>
         <p class="nf-description">Nesta apresentação, exploramos o declínio estrutural e a transição digital da Cartoon Network, abrangendo TV, streaming e cultura.</p>
@@ -325,6 +328,7 @@
     isDocUiInitialized = true;
   };
 
+  // --- RENDERIZAÇÃO INTERROMPE O MODO CINZA SE A IMAGEM NÃO EXISTIR ---
   const renderEpisodesList = (data) => {
     const listContainer = document.querySelector('.episodes-list');
     if (!listContainer) return;
@@ -338,9 +342,12 @@
       card.className = 'episode-card';
       card.setAttribute('tabindex', '0');
 
+      // Modificado: Se a thumb der erro, oculta o bloco cinza de carregamento do card pai
       card.innerHTML = `
-        <div class="episode-thumb-wrapper">
-          <img src="${ep.thumbnail}" alt="Thumb" class="episode-thumb" onerror="this.style.display='none'">
+        <div class="episode-thumb-wrapper" style="background-color: #262626;">
+          <img src="${ep.thumbnail}" alt="Thumb" class="episode-thumb" 
+               onload="this.closest('.episode-card').classList.remove('loading-skeleton')"
+               onerror="this.style.display='none'; this.closest('.episode-card').classList.remove('loading-skeleton');">
         </div>
         <div class="episode-info">
           <h3 class="episode-title">${ep.order}. ${ep.title}</h3>
