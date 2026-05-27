@@ -1,4 +1,4 @@
-// episodes-ui.js - Versão Corrigida (Tratamento de Erros de Imagem)
+// episodes-ui.js - Versão Forçada (Anti-Trava de Skeleton e Exibição Garantida)
 (() => {
   console.log("[Cartoon Doc] Módulo Dashboard Inicial ativado com força total de CSS.");
 
@@ -96,9 +96,6 @@
         gap: 20px !important;
         margin-bottom: 40px !important;
       }
-      .nf-row-fallback-bg {
-        background-color: #222 !important;
-      }
       .nf-card {
         background: #141414 !important;
         border-radius: 4px !important;
@@ -136,6 +133,54 @@
         z-index: 5 !important;
         text-transform: uppercase !important;
       }
+
+      /* Sobrescrita agressiva para destruir animações de esqueleto antigas */
+      .episodes-list .episode-card {
+        background: #1f1f1f !important;
+        animation: none !important;
+        background-image: none !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        display: flex !important;
+        gap: 15px !important;
+        padding: 15px !important;
+        border-bottom: 1px solid #333 !important;
+        margin-bottom: 10px !important;
+        cursor: pointer !important;
+      }
+      .episode-thumb-wrapper {
+        width: 150px !important;
+        height: 90px !important;
+        background-color: #333 !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        flex-shrink: 0 !important;
+      }
+      .episode-info {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 5px !important;
+        width: 100% !important;
+      }
+      .episode-title {
+        color: #ffffff !important;
+        font-size: 1.1rem !important;
+        margin: 0 !important;
+        display: block !important;
+      }
+      .episode-meta {
+        color: #aaa !important;
+        font-size: 0.85rem !important;
+        display: block !important;
+      }
+      .episode-summary {
+        color: #ccc !important;
+        font-size: 0.9rem !important;
+        margin: 0 !important;
+        display: block !important;
+      }
+
       @keyframes fadeInDoc {
         from { opacity: 0; transform: translateY(15px); }
         to { opacity: 1; transform: translateY(0); }
@@ -150,7 +195,6 @@
     localStorage.setItem('episodes_progress', JSON.stringify(progress));
   };
 
-  // --- BUSCA DOS EPISÓDIOS COM ANULAÇÃO DE CACHE COMPLETA ---
   const fetchEpisodes = async () => {
     try {
       const res = await fetch('episodes.json', { cache: 'no-store' });
@@ -174,7 +218,6 @@
 
     if (!originalVideoWrapper || !backBtn || !videoElem) return;
 
-    // Escudo de Interceptação da Vinheta/Intro
     if (!videoElem.dataset.hooked) {
       videoElem.dataset.hooked = "true";
       videoElem.addEventListener('ended', (e) => {
@@ -186,12 +229,11 @@
       }, { capture: true });
     }
 
-    // --- CRIAÇÃO DO PAINEL DASHBOARD NETFLIX (Caminhos Corrigidos para assets/) ---
     const dashboardPanel = document.createElement('div');
     dashboardPanel.id = 'netflixDashboardPanel';
     dashboardPanel.className = 'netflix-dashboard';
     dashboardPanel.innerHTML = `
-      <div class="nf-banner" onerror="this.classList.add('nf-row-fallback-bg')">
+      <div class="nf-banner">
         <h1 class="nf-title">Cartoon Network:</h1>
         <div class="nf-subtitle">Declínio e Reinvenção</div>
         <p class="nf-description">Nesta apresentação, exploramos o declínio estrutural e a transição digital da Cartoon Network, abrangendo TV, streaming e cultura.</p>
@@ -226,7 +268,6 @@
       </div>
     `;
 
-    // --- CRIAÇÃO DAS ABAS ---
     const tabsNav = document.createElement('div');
     tabsNav.className = 'doc-tabs-nav';
     tabsNav.style.setProperty('display', 'none', 'important');
@@ -242,7 +283,6 @@
     tabsNav.appendChild(tabDoc);
     tabsNav.appendChild(tabBackHome);
 
-    // --- CRIAÇÃO DO CONTRA-PAINEL DE EPISÓDIOS ---
     const docPanel = document.createElement('div');
     docPanel.id = 'documentaryPanel';
     docPanel.style.setProperty('display', 'none', 'important');
@@ -250,7 +290,7 @@
     const searchBar = document.createElement('input');
     searchBar.type = 'text';
     searchBar.className = 'doc-search-bar';
-    searchBar.placeholder = 'Buscar episódio ou transcrição...';
+    searchBar.placeholder = 'Buscar episódio...';
     
     const episodesList = document.createElement('div');
     episodesList.className = 'episodes-list';
@@ -258,7 +298,6 @@
     docPanel.appendChild(searchBar);
     docPanel.appendChild(episodesList);
 
-    // --- SEÇÃO DE TRANSCRIÇÃO ---
     const transcriptSection = document.createElement('div');
     transcriptSection.className = 'transcript-section';
     transcriptSection.style.setProperty('display', 'none', 'important');
@@ -270,13 +309,11 @@
       <div id="transcriptText" class="transcript-content"></div>
     `;
 
-    // Montagem estruturada ignorando posições flutuantes antigas
     originalVideoWrapper.parentNode.insertBefore(transcriptSection, originalVideoWrapper.nextSibling);
     backBtn.insertAdjacentElement('afterend', dashboardPanel);
     dashboardPanel.insertAdjacentElement('afterend', tabsNav);
     tabsNav.insertAdjacentElement('afterend', docPanel);
 
-    // --- SISTEMA DE CHAVEAMENTO IMPERATIVO COM !IMPORTANT ---
     const showDashboard = () => {
       blockNativeEnded = false;
       dashboardPanel.style.setProperty('display', 'block', 'important');
@@ -300,10 +337,9 @@
       renderEpisodesList(episodesData);
     };
 
-    // Ações de clique interativas do Painel Principal
     dashboardPanel.querySelector('#nfPlayBtn').addEventListener('click', showEpisodesGrid);
     dashboardPanel.querySelector('#nfInfoBtn').addEventListener('click', () => {
-      alert("Cartoon Network: Declínio e Reinvenção\n\nUma análise profunda sobre as transformações, eras de ouro e os desafios digitais enfrentados pela marca.");
+      alert("Cartoon Network: Declínio e Reinvenção\n\nUma análise profunda sobre as transformações, eras de ouro e os desafios digitais.");
     });
 
     tabDoc.addEventListener('click', showEpisodesGrid);
@@ -312,8 +348,7 @@
     searchBar.addEventListener('input', (e) => {
       const term = e.target.value.toLowerCase();
       const filtered = episodesData.filter(ep => 
-        ep.title.toLowerCase().includes(term) || 
-        ep.transcript.toLowerCase().includes(term)
+        ep.title.toLowerCase().includes(term)
       );
       renderEpisodesList(filtered);
     });
@@ -322,13 +357,12 @@
       document.getElementById('transcriptText').classList.toggle('visible');
     });
 
-    // Estado inicial: Dashboard Visível, player antigo trancado e ocultado
     showDashboard();
     fetchEpisodes();
     isDocUiInitialized = true;
   };
 
-  // --- RENDERIZAÇÃO INTERROMPE O MODO CINZA SE A IMAGEM NÃO EXISTIR ---
+  // --- RENDERING INTEGRAL REMOVENDO QUALQUER TRAVA DE CLASSE EXTERNA ---
   const renderEpisodesList = (data) => {
     const listContainer = document.querySelector('.episodes-list');
     if (!listContainer) return;
@@ -339,21 +373,23 @@
     data.forEach((ep) => {
       const isWatched = progressMap[ep.id] ? 'Visto' : '';
       const card = document.createElement('div');
+      
+      // Força a remoção manual de estados antigos limpando classes intrusas
       card.className = 'episode-card';
+      card.className = 'episode-card'; 
+      card.style.cssText = "display: flex !important; visibility: visible !important; opacity: 1 !important; background: #1f1f1f !important;";
       card.setAttribute('tabindex', '0');
 
-      // Modificado: Se a thumb der erro, oculta o bloco cinza de carregamento do card pai
       card.innerHTML = `
-        <div class="episode-thumb-wrapper" style="background-color: #262626;">
-          <img src="${ep.thumbnail}" alt="Thumb" class="episode-thumb" 
-               onload="this.closest('.episode-card').classList.remove('loading-skeleton')"
-               onerror="this.style.display='none'; this.closest('.episode-card').classList.remove('loading-skeleton');">
+        <div class="episode-thumb-wrapper">
+          <span style="color: #666; font-size: 0.8rem; position: absolute;">Sem Foto</span>
+          <img src="${ep.thumbnail}" alt="Thumb" class="episode-thumb" style="width:100%; height:100%; object-fit:cover; z-index:2; position:relative;" onerror="this.style.display='none'">
         </div>
         <div class="episode-info">
           <h3 class="episode-title">${ep.order}. ${ep.title}</h3>
           <span class="episode-meta">Duração: ${ep.duration}</span>
           <p class="episode-summary">${ep.summary}</p>
-          ${isWatched ? `<span class="episode-progress">✓ Assistido</span>` : ''}
+          ${isWatched ? `<span class="episode-progress" style="color: #2ecc71; font-size: 0.8rem;">✓ Assistido</span>` : ''}
         </div>
       `;
 
@@ -412,6 +448,7 @@
         originalTitle.innerHTML = `Documentário: <span>${currentPlayingEpisode.title}</span>`;
       }
 
+      // É aqui que a transcrição é ativada e preenchida!
       transcriptSection.style.setProperty('display', 'block', 'important');
       transcriptText.innerText = currentPlayingEpisode.transcript;
       transcriptText.classList.remove('visible'); 
@@ -422,7 +459,6 @@
       blockNativeEnded = false;
       currentPlayingEpisode = null;
       
-      // Ao terminar o episódio real, reativa a interface de seleção e limpa o player
       document.getElementById('netflixDashboardPanel').style.setProperty('display', 'none', 'important');
       document.querySelector('.doc-tabs-nav').style.setProperty('display', 'flex', 'important');
       document.getElementById('documentaryPanel').style.setProperty('display', 'block', 'important');
