@@ -1,6 +1,6 @@
-// episodes-ui.js - Versão Autocorreção e Resiliência contra Erros de JSON
+// episodes-ui.js - Versão Oficial com Segurança Anti-Travamento de Tela
 (() => {
-  console.log("[Cartoon Doc] Módulo Dashboard Inicial ativado com força total de CSS.");
+  console.log("[Cartoon Doc] Módulo Dashboard Inicial ativado com sucesso.");
 
   let episodesData = [];
   let isDocUiInitialized = false;
@@ -47,25 +47,6 @@
       .nf-card { background: #141414 !important; border-radius: 4px !important; overflow: hidden !important; position: relative !important; aspect-ratio: 16/10 !important; display: flex !important; flex-direction: column !important; justify-content: flex-end !important; padding: 12px !important; border: 1px solid #222 !important; cursor: pointer !important; }
       .nf-card-title { font-size: 0.95rem !important; font-weight: bold !important; color: #fff !important; z-index: 5 !important; text-shadow: 1px 1px 3px rgba(0,0,0,1) !important; }
       .nf-badge { background-color: #e50914 !important; color: white !important; font-size: 0.7rem !important; font-weight: bold !important; padding: 3px 8px !important; border-radius: 2px !important; align-self: flex-start !important; z-index: 5 !important; }
-      
-      /* Reset visual completo da lista de episódios para ignorar esqueletos travados */
-      .episodes-list { display: flex !important; flex-direction: column !important; gap: 15px !important; }
-      .episode-card { 
-        display: flex !important; 
-        background: #181818 !important; 
-        border-radius: 6px !important; 
-        padding: 15px !important; 
-        gap: 20px !important; 
-        cursor: pointer !important;
-        border: 1px solid #2f2f2f !important;
-        animation: none !important;
-      }
-      .episode-thumb-wrapper { width: 160px !important; height: 90px !important; background: #262626 !important; flex-shrink: 0 !important; border-radius: 4px !important; display: flex !important; align-items: center !important; justify-content: center !important; overflow: hidden !important; }
-      .episode-info { display: flex !important; flex-direction: column !important; justify-content: center !important; color: #fff !important; }
-      .episode-title { font-size: 1.15rem !important; color: #fff !important; margin: 0 0 4px 0 !important; font-weight: bold !important; }
-      .episode-meta { font-size: 0.85rem !important; color: #777 !important; margin-bottom: 6px !important; }
-      .episode-summary { font-size: 0.9rem !important; color: #b3b3b3 !important; margin: 0 !important; line-height: 1.4 !important; }
-      
       @keyframes fadeInDoc { from { opacity: 0; } to { opacity: 1; } }
     `;
     document.head.appendChild(style);
@@ -81,19 +62,18 @@
     const listContainer = document.querySelector('.episodes-list');
     try {
       const res = await fetch('episodes.json', { cache: 'no-store' });
-      if (!res.ok) throw new Error('Não encontrou episodes.json');
+      if (!res.ok) throw new Error('Falha ao requisitar o arquivo JSON.');
       episodesData = await res.json();
       renderEpisodesList(episodesData);
     } catch (err) {
-      console.error("[Cartoon Doc] Erro detectado no JSON:", err);
+      console.error("[Cartoon Doc] Erro crítico no carregamento:", err);
       if (listContainer) {
-        // Se o JSON falhar, limpa os esqueletos e mostra o erro na tela
+        listContainer.removeAttribute('style'); 
         listContainer.innerHTML = `
-          <div style="padding: 30px; background: #2a1215; border: 1px solid #e50914; color: #ff9999; border-radius: 6px; font-family: sans-serif;">
-            <h3 style="margin-top:0;">⚠️ Erro de Carregamento (Sintaxe do JSON)</h3>
-            <p>O arquivo <strong>episodes.json</strong> possui um erro de formatação e não pôde ser lido.</p>
-            <p><strong>Detalhe técnico:</strong> ${err.message}</p>
-            <p style="font-size:0.85rem; color:#aaa;">Verifique a linha 170 do arquivo no seu repositório.</p>
+          <div style="padding: 20px; background: #2c1416; border: 1px solid #e50914; color: #ff9e9e; border-radius: 6px; font-family: sans-serif; margin-top: 15px;">
+            <h4 style="margin-top:0; color:#ff4d4d;">⚠️ Erro Estrutural no Arquivo JSON</h4>
+            <p style="font-size:0.9rem; margin: 5px 0;">O arquivo de episódios possui uma quebra de sintaxe incorreta.</p>
+            <small style="color:#ccc; display:block; background:rgba(0,0,0,0.3); padding:6px; border-radius:4px;">${err.message}</small>
           </div>
         `;
       }
@@ -197,8 +177,8 @@
     transcriptSection.style.setProperty('display', 'none', 'important');
     transcriptSection.innerHTML = `
       <div class="transcript-header">
-        <h3>Transcrição</h3>
-        <button id="toggleTranscriptBtn">Mostrar / Ocultar</button>
+        <h3 style="margin:0; font-size:1.2rem;">Transcrição</h3>
+        <button id="toggleTranscriptBtn" class="doc-tab-btn" style="font-size:1rem; border:1px solid #444; border-radius:4px; padding:4px 12px;">Mostrar / Ocultar</button>
       </div>
       <div id="transcriptText" class="transcript-content"></div>
     `;
@@ -233,7 +213,7 @@
 
     dashboardPanel.querySelector('#nfPlayBtn').addEventListener('click', showEpisodesGrid);
     dashboardPanel.querySelector('#nfInfoBtn').addEventListener('click', () => {
-      alert("Cartoon Network: Declínio e Reinvenção\n\nUma análise profunda sobre o canal.");
+      alert("Cartoon Network: Declínio e Reinvenção\n\nUma análise profunda dividida em múltiplos capítulos.");
     });
 
     tabDoc.addEventListener('click', showEpisodesGrid);
@@ -261,26 +241,25 @@
     const progressMap = JSON.parse(localStorage.getItem('episodes_progress') || '{}');
 
     if(data.length === 0) {
-      listContainer.innerHTML = '<p style="color:#aaa; padding:20px;">Nenhum episódio encontrado.</p>';
+      listContainer.innerHTML = '<p style="color:#aaa; padding:20px;">Nenhum capítulo encontrado.</p>';
       return;
     }
 
     data.forEach((ep) => {
-      const isWatched = progressMap[ep.id] ? 'Visto' : '';
+      const isWatched = progressMap[ep.id];
       const card = document.createElement('div');
       card.className = 'episode-card';
       card.setAttribute('tabindex', '0');
 
       card.innerHTML = `
         <div class="episode-thumb-wrapper">
-          <span style="color: #555; font-size: 0.75rem; position: absolute; z-index:1;">Sem foto</span>
-          <img src="${ep.thumbnail}" alt="Thumb" style="width:100%; height:100%; object-fit:cover; position:relative; z-index:2;" onerror="this.style.display='none'">
+          <img class="episode-thumb" src="${ep.thumbnail}" alt="Thumbnail" onerror="this.style.opacity='0';">
         </div>
         <div class="episode-info">
           <h3 class="episode-title">${ep.order}. ${ep.title}</h3>
           <span class="episode-meta">Duração: ${ep.duration}</span>
           <p class="episode-summary">${ep.summary}</p>
-          ${isWatched ? `<span style="color:#2ecc71; font-size:0.8rem; margin-top:5px;">✓ Assistido</span>` : ''}
+          ${isWatched ? `<span class="episode-progress">✓ Assistido</span>` : ''}
         </div>
       `;
 
@@ -309,11 +288,11 @@
 
     if (originalTitle) {
       originalTitle.style.setProperty('display', 'block', 'important');
-      originalTitle.innerHTML = `Apresentando...`;
+      originalTitle.innerHTML = `Apresentando abertura...`;
     }
 
     videoElem.src = 'assets/intro.mp4';
-    videoElem.play().catch(e => console.warn("Autoplay bloqueado:", e));
+    videoElem.play().catch(e => console.warn("Autoplay suspenso:", e));
   };
 
   const handleVideoEnded = () => {
@@ -329,7 +308,7 @@
       saveProgress(currentPlayingEpisode.id);
 
       if (originalTitle) {
-        originalTitle.innerHTML = `Documentário: <span>${currentPlayingEpisode.title}</span>`;
+        originalTitle.innerHTML = `Documentário: <span style="color:#f1c40f;">${currentPlayingEpisode.title}</span>`;
       }
 
       transcriptSection.style.setProperty('display', 'block', 'important');
@@ -337,7 +316,7 @@
       transcriptText.classList.remove('visible'); 
 
       videoElem.src = currentPlayingEpisode.video;
-      videoElem.play().catch(e => console.warn("Autoplay do vídeo bloqueado:", e));
+      videoElem.play().catch(e => console.warn("Erro ao iniciar capítulo:", e));
     } else {
       blockNativeEnded = false;
       currentPlayingEpisode = null;
