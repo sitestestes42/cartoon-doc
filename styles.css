@@ -1,8 +1,10 @@
 :root {
-  --bg-color: #141414;
+  --bg-color: #0a0a0a;
   --text-color: #e5e5e5;
   --hover-color: #ffffff;
   --focus-ring: #0071eb;
+  --accent-gold: #d4a574;
+  --accent-dark: #1a1a1a;
 }
 
 * {
@@ -153,6 +155,9 @@ button:hover, button:focus {
   flex-direction: column;
   padding: 20px;
   animation: fadeIn 0.5s ease-in-out;
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+  position: relative;
+  overflow: hidden;
 }
 
 #playerTitle {
@@ -160,16 +165,290 @@ button:hover, button:focus {
   font-size: 1.5rem;
 }
 
-.video-wrapper video {
+.video-wrapper {
+  position: relative;
   width: 100%;
   max-height: 70vh;
   background: black;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 0 40px rgba(212, 165, 116, 0.2);
+}
+
+.video-wrapper video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Netflix Dashboard Styles */
+.netflix-dashboard {
+  color: #fff !important;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+  padding: 20px !important;
+  animation: fadeInDoc 0.6s ease-out !important;
+  display: none;
+}
+
+.nf-banner {
+  position: relative !important;
+  min-height: 400px !important;
+  background: linear-gradient(77deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.3) 100%), url('assets/painel.jpg') no-repeat center center !important;
+  background-size: cover !important;
+  border-radius: 8px !important;
+  padding: 60px 40px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  box-shadow: inset 0 0 100px rgba(0,0,0,0.8) !important;
+  margin-bottom: 40px !important;
+}
+
+.nf-title { 
+  font-size: 3.2rem !important; 
+  font-weight: bold !important; 
+  margin: 0 0 5px 0 !important; 
+  color: #d4a574 !important; 
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.8) !important; 
+}
+
+.nf-subtitle { 
+  font-size: 1.8rem !important; 
+  color: #d4a574 !important; 
+  font-weight: bold !important; 
+  margin-bottom: 15px !important; 
+}
+
+.nf-description { 
+  font-size: 1.1rem !important; 
+  max-width: 550px !important; 
+  color: #e5e5e5 !important; 
+  margin-bottom: 25px !important; 
+}
+
+.nf-actions { 
+  display: flex !important; 
+  gap: 15px !important; 
+}
+
+.nf-btn { 
+  display: inline-flex !important; 
+  align-items: center !important; 
+  justify-content: center !important; 
+  padding: 12px 30px !important; 
+  font-size: 1.1rem !important; 
+  font-weight: bold !important; 
+  border: none !important; 
+  border-radius: 4px !important; 
+  cursor: pointer !important; 
+  transition: all 0.3s ease !important;
+}
+
+.nf-btn-primary { 
+  background-color: #d4a574 !important; 
+  color: #000000 !important; 
+}
+
+.nf-btn-primary:hover {
+  background-color: #ffffff !important;
+  transform: scale(1.05) !important;
+}
+
+.nf-btn-secondary { 
+  background-color: rgba(109, 109, 110, 0.7) !important; 
+  color: #ffffff !important; 
+}
+
+.nf-btn-secondary:hover {
+  background-color: rgba(212, 165, 116, 0.5) !important;
+}
+
+.nf-section-title { 
+  font-size: 1.5rem !important; 
+  font-weight: bold !important; 
+  margin-bottom: 20px !important; 
+  color: #d4a574 !important; 
+}
+
+.nf-row { 
+  display: grid !important; 
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)) !important; 
+  gap: 20px !important; 
+  margin-bottom: 40px !important; 
+}
+
+.nf-card { 
+  background: #141414 !important; 
+  border-radius: 4px !important; 
+  overflow: hidden !important; 
+  position: relative !important; 
+  aspect-ratio: 16/10 !important; 
+  display: flex !important; 
+  flex-direction: column !important; 
+  justify-content: flex-end !important; 
+  padding: 12px !important; 
+  border: 1px solid #333 !important; 
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+}
+
+.nf-card:hover {
+  border-color: #d4a574 !important;
+  box-shadow: 0 0 20px rgba(212, 165, 116, 0.3) !important;
+}
+
+.nf-card-title { 
+  font-size: 0.95rem !important; 
+  font-weight: bold !important; 
+  color: #fff !important; 
+  z-index: 5 !important; 
+  text-shadow: 1px 1px 3px rgba(0,0,0,1) !important; 
+}
+
+.nf-badge { 
+  background-color: #d4a574 !important; 
+  color: #000 !important; 
+  font-size: 0.7rem !important; 
+  font-weight: bold !important; 
+  padding: 3px 8px !important; 
+  border-radius: 2px !important; 
+  align-self: flex-start !important; 
+  z-index: 5 !important; 
+}
+
+/* Episodes List */
+.episodes-list {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)) !important;
+  gap: 20px !important;
+  padding: 20px 0 !important;
+}
+
+.episode-card {
+  background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%) !important;
+  border: 1px solid #333 !important;
+  border-radius: 8px !important;
+  overflow: hidden !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.episode-card:hover {
+  border-color: #d4a574 !important;
+  box-shadow: 0 0 30px rgba(212, 165, 116, 0.4) !important;
+  transform: translateY(-5px) !important;
+}
+
+.episode-thumb-wrapper {
+  width: 100% !important;
+  height: 150px !important;
+  overflow: hidden !important;
+  background: #000 !important;
+}
+
+.episode-thumb {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+}
+
+.episode-info {
+  padding: 15px !important;
+  flex-grow: 1 !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.episode-title {
+  font-size: 1rem !important;
+  font-weight: bold !important;
+  color: #d4a574 !important;
+  margin-bottom: 5px !important;
+}
+
+.episode-meta {
+  font-size: 0.85rem !important;
+  color: #999 !important;
+  margin-bottom: 8px !important;
+}
+
+.episode-summary {
+  font-size: 0.9rem !important;
+  color: #ccc !important;
+  line-height: 1.4 !important;
+  flex-grow: 1 !important;
+}
+
+.episode-progress {
+  display: inline-block !important;
+  background: #d4a574 !important;
+  color: #000 !important;
+  padding: 4px 8px !important;
+  border-radius: 4px !important;
+  font-size: 0.8rem !important;
+  font-weight: bold !important;
+  margin-top: 8px !important;
+}
+
+/* Doc Tabs Navigation */
+.doc-tabs-nav {
+  display: flex !important;
+  gap: 15px !important;
+  margin-bottom: 20px !important;
+  border-bottom: 2px solid #333 !important;
+  padding-bottom: 15px !important;
+}
+
+.doc-tab-btn {
+  background: transparent !important;
+  border: none !important;
+  color: #999 !important;
+  font-size: 1rem !important;
+  cursor: pointer !important;
+  padding: 8px 0 !important;
+  transition: all 0.3s ease !important;
+  border-bottom: 2px solid transparent !important;
+}
+
+.doc-tab-btn.active {
+  color: #d4a574 !important;
+  border-bottom-color: #d4a574 !important;
+}
+
+.doc-tab-btn:hover {
+  color: #d4a574 !important;
+}
+
+/* Search Bar */
+.doc-search-bar {
+  width: 100% !important;
+  padding: 12px 15px !important;
+  background: #1a1a1a !important;
+  border: 1px solid #333 !important;
+  border-radius: 4px !important;
+  color: #fff !important;
+  font-size: 1rem !important;
+  margin-bottom: 20px !important;
+  transition: all 0.3s ease !important;
+}
+
+.doc-search-bar:focus {
+  outline: none !important;
+  border-color: #d4a574 !important;
+  box-shadow: 0 0 10px rgba(212, 165, 116, 0.3) !important;
 }
 
 /* Animations & A11y */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInDoc {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -185,4 +464,9 @@ button:hover, button:focus {
   #profiles h1 { font-size: 2rem; }
   .profile-name { font-size: 1rem; }
   .avatar-wrapper { width: 100px; height: 100px; }
+  .nf-banner { padding: 40px 20px !important; }
+  .nf-title { font-size: 2rem !important; }
+  .nf-subtitle { font-size: 1.3rem !important; }
+  .nf-row { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)) !important; }
+  .episodes-list { grid-template-columns: 1fr !important; }
 }
