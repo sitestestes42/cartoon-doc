@@ -1,9 +1,10 @@
-// episodes-ui.js - Versão Oficial com Segurança Anti-Travamento de Tela
+// episodes-ui.js - Versão Cinematic Decay com Navegação de Episódios
 (() => {
-  console.log("[Cartoon Doc] Módulo Dashboard Inicial ativado com sucesso.");
+  console.log("[Cartoon Network] Módulo de Episódios ativado com sucesso.");
 
   let episodesData = [];
   let isDocUiInitialized = false;
+  let currentEpisodeIndex = 0;
   
   let currentPlayingEpisode = null;
   let isPlayingIntro = false;
@@ -22,31 +23,6 @@
         animation: fadeInDoc 0.6s ease-out !important;
         display: none;
       }
-      .nf-banner {
-        position: relative !important;
-        min-height: 400px !important;
-        background: linear-gradient(77deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.3) 100%), url('assets/painel.jpg') no-repeat center center !important;
-        background-size: cover !important;
-        border-radius: 8px !important;
-        padding: 60px 40px !important;
-        display: flex !important;
-        flex-direction: column !important;
-        justify-content: center !important;
-        box-shadow: inset 0 0 100px rgba(0,0,0,0.8) !important;
-        margin-bottom: 40px !important;
-      }
-      .nf-title { font-size: 3.2rem !important; font-weight: bold !important; margin: 0 0 5px 0 !important; color: #fff !important; text-shadow: 2px 2px 4px rgba(0,0,0,0.8) !important; }
-      .nf-subtitle { font-size: 1.8rem !important; color: #f1c40f !important; font-weight: bold !important; margin-bottom: 15px !important; }
-      .nf-description { font-size: 1.1rem !important; max-width: 550px !important; color: #e5e5e5 !important; margin-bottom: 25px !important; }
-      .nf-actions { display: flex !important; gap: 15px !important; }
-      .nf-btn { display: inline-flex !important; align-items: center !important; justify-content: center !important; padding: 12px 30px !important; font-size: 1.1rem !important; font-weight: bold !important; border: none !important; border-radius: 4px !important; cursor: pointer !important; }
-      .nf-btn-primary { background-color: #ffffff !important; color: #000000 !important; }
-      .nf-btn-secondary { background-color: rgba(109, 109, 110, 0.7) !important; color: #ffffff !important; }
-      .nf-section-title { font-size: 1.5rem !important; font-weight: bold !important; margin-bottom: 20px !important; color: #fff !important; }
-      .nf-row { display: grid !important; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)) !important; gap: 20px !important; margin-bottom: 40px !important; }
-      .nf-card { background: #141414 !important; border-radius: 4px !important; overflow: hidden !important; position: relative !important; aspect-ratio: 16/10 !important; display: flex !important; flex-direction: column !important; justify-content: flex-end !important; padding: 12px !important; border: 1px solid #222 !important; cursor: pointer !important; }
-      .nf-card-title { font-size: 0.95rem !important; font-weight: bold !important; color: #fff !important; z-index: 5 !important; text-shadow: 1px 1px 3px rgba(0,0,0,1) !important; }
-      .nf-badge { background-color: #e50914 !important; color: white !important; font-size: 0.7rem !important; font-weight: bold !important; padding: 3px 8px !important; border-radius: 2px !important; align-self: flex-start !important; z-index: 5 !important; }
       @keyframes fadeInDoc { from { opacity: 0; } to { opacity: 1; } }
     `;
     document.head.appendChild(style);
@@ -66,13 +42,13 @@
       episodesData = await res.json();
       renderEpisodesList(episodesData);
     } catch (err) {
-      console.error("[Cartoon Doc] Erro crítico no carregamento:", err);
+      console.error("[Cartoon Network] Erro crítico no carregamento:", err);
       if (listContainer) {
         listContainer.removeAttribute('style'); 
         listContainer.innerHTML = `
-          <div style="padding: 20px; background: #2c1416; border: 1px solid #e50914; color: #ff9e9e; border-radius: 6px; font-family: sans-serif; margin-top: 15px;">
-            <h4 style="margin-top:0; color:#ff4d4d;">⚠️ Erro Estrutural no Arquivo JSON</h4>
-            <p style="font-size:0.9rem; margin: 5px 0;">O arquivo de episódios possui uma quebra de sintaxe incorreta.</p>
+          <div style="padding: 20px; background: #2c1416; border: 1px solid #d4a574; color: #ff9e9e; border-radius: 6px; font-family: sans-serif; margin-top: 15px;">
+            <h4 style="margin-top:0; color:#d4a574;">⚠️ Erro ao carregar episódios</h4>
+            <p style="font-size:0.9rem; margin: 5px 0;">O arquivo de episódios possui uma quebra de sintaxe.</p>
             <small style="color:#ccc; display:block; background:rgba(0,0,0,0.3); padding:6px; border-radius:4px;">${err.message}</small>
           </div>
         `;
@@ -109,35 +85,27 @@
     dashboardPanel.innerHTML = `
       <div class="nf-banner">
         <h1 class="nf-title">Cartoon Network:</h1>
-        <div class="nf-subtitle">Declínio e Reinvenção</div>
-        <p class="nf-description">Nesta apresentação, exploramos o declínio estrutural e a transição digital da Cartoon Network, abrangendo TV, streaming e cultura.</p>
+        <div class="nf-subtitle">O Declínio de Uma Era</div>
+        <p class="nf-description">Nesta apresentação, exploramos o declínio estrutural e a transição digital da Cartoon Network, abrangendo TV, streaming e cultura em 22 episódios.</p>
         <div class="nf-actions">
-          <button class="nf-btn nf-btn-primary" id="nfPlayBtn">▶ Assistir</button>
+          <button class="nf-btn nf-btn-primary" id="nfPlayBtn">▶ Assistir Episódios</button>
           <button class="nf-btn nf-btn-secondary" id="nfInfoBtn">ⓘ Mais informações</button>
         </div>
       </div>
       
       <div class="nf-section-title">Dicas para você</div>
       <div class="nf-row">
-        <div class="nf-card" style="background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.9)), url('assets/chris.jpg') center/cover no-repeat !important;">
-          <div class="nf-card-title">Todo Mundo Ainda Odeia o Chris</div>
-          <span class="nf-badge">Novidade</span>
+        <div class="nf-card" style="background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.9)), url('assets/painel.jpg') center/cover no-repeat !important;">
+          <div class="nf-card-title">Episódio 1: Origem</div>
+          <span class="nf-badge">Início</span>
         </div>
-        <div class="nf-card" style="background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.9)), url('assets/oth.jpg') center/cover no-repeat !important;">
-          <div class="nf-card-title">One Tree Hill</div>
-          <span class="nf-badge">Novidade</span>
+        <div class="nf-card" style="background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.9)), url('assets/painel.jpg') center/cover no-repeat !important;">
+          <div class="nf-card-title">Episódio 6: Erros</div>
+          <span class="nf-badge">Destaque</span>
         </div>
-        <div class="nf-card" style="background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.9)), url('assets/horimiya.jpg') center/cover no-repeat !important;">
-          <div class="nf-card-title">Horimiya</div>
-          <span class="nf-badge">Novidade</span>
-        </div>
-        <div class="nf-card" style="background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.9)), url('assets/dmc.jpg') center/cover no-repeat !important;">
-          <div class="nf-card-title">Devil May Cry</div>
-          <span class="nf-badge">Nova Temporada</span>
-        </div>
-        <div class="nf-card" style="background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.9)), url('assets/shangri.jpg') center/cover no-repeat !important;">
-          <div class="nf-card-title">Shangri-La Frontier</div>
-          <span class="nf-badge">Novidade</span>
+        <div class="nf-card" style="background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.9)), url('assets/painel.jpg') center/cover no-repeat !important;">
+          <div class="nf-card-title">Episódio 22: Resultados</div>
+          <span class="nf-badge">Final</span>
         </div>
       </div>
     `;
@@ -213,7 +181,7 @@
 
     dashboardPanel.querySelector('#nfPlayBtn').addEventListener('click', showEpisodesGrid);
     dashboardPanel.querySelector('#nfInfoBtn').addEventListener('click', () => {
-      alert("Cartoon Network: Declínio e Reinvenção\n\nUma análise profunda dividida em múltiplos capítulos.");
+      alert("Cartoon Network: O Declínio de Uma Era\n\nUma análise profunda dividida em 22 episódios sobre a trajetória, declínio e possível reinvenção da Cartoon Network.");
     });
 
     tabDoc.addEventListener('click', showEpisodesGrid);
@@ -241,11 +209,11 @@
     const progressMap = JSON.parse(localStorage.getItem('episodes_progress') || '{}');
 
     if(data.length === 0) {
-      listContainer.innerHTML = '<p style="color:#aaa; padding:20px;">Nenhum capítulo encontrado.</p>';
+      listContainer.innerHTML = '<p style="color:#aaa; padding:20px;">Nenhum episódio encontrado.</p>';
       return;
     }
 
-    data.forEach((ep) => {
+    data.forEach((ep, index) => {
       const isWatched = progressMap[ep.id];
       const card = document.createElement('div');
       card.className = 'episode-card';
@@ -253,7 +221,7 @@
 
       card.innerHTML = `
         <div class="episode-thumb-wrapper">
-          <img class="episode-thumb" src="${ep.thumbnail}" alt="Thumbnail" onerror="this.style.opacity='0';">
+          <img class="episode-thumb" src="${ep.thumbnail}" alt="Thumbnail ${ep.order}" onerror="this.style.opacity='0.3';">
         </div>
         <div class="episode-info">
           <h3 class="episode-title">${ep.order}. ${ep.title}</h3>
@@ -263,15 +231,22 @@
         </div>
       `;
 
-      card.addEventListener('click', () => playEpisode(ep));
+      card.addEventListener('click', () => playEpisode(ep, index));
+      card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          playEpisode(ep, index);
+        }
+      });
       listContainer.appendChild(card);
     });
   };
 
-  const playEpisode = (ep) => {
+  const playEpisode = (ep, index) => {
     currentPlayingEpisode = ep;
+    currentEpisodeIndex = index;
     isPlayingIntro = true;
-    blockNativeEnded = true; 
+    blockNativeEnded = true;
 
     const playerSection = document.getElementById('player');
     const originalVideoWrapper = playerSection.querySelector('.video-wrapper');
@@ -284,67 +259,73 @@
     document.querySelector('.doc-tabs-nav').style.setProperty('display', 'none', 'important');
     
     originalVideoWrapper.style.setProperty('display', 'block', 'important');
-    transcriptSection.style.setProperty('display', 'none', 'important'); 
+    transcriptSection.style.setProperty('display', 'none', 'important');
 
     if (originalTitle) {
       originalTitle.style.setProperty('display', 'block', 'important');
-      originalTitle.innerHTML = `Apresentando abertura...`;
+      originalTitle.innerHTML = `<span>${ep.title}</span>`;
     }
 
-    videoElem.src = 'assets/intro.mp4';
+    // Aplicar background com imagem do episódio
+    if (ep.thumbnail) {
+      originalVideoWrapper.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('${ep.thumbnail}')`;
+      originalVideoWrapper.style.backgroundSize = 'cover';
+      originalVideoWrapper.style.backgroundPosition = 'center';
+    }
+
+    videoElem.src = ep.video;
     videoElem.play().catch(e => console.warn("Autoplay suspenso:", e));
+
+    // Salvar progresso
+    saveProgress(ep.id);
   };
 
   const handleVideoEnded = () => {
     const playerSection = document.getElementById('player');
     const originalVideoWrapper = playerSection.querySelector('.video-wrapper');
+    const videoElem = originalVideoWrapper.querySelector('video');
+
+    // Ir para próximo episódio automaticamente
+    if (currentEpisodeIndex < episodesData.length - 1) {
+      const nextEpisode = episodesData[currentEpisodeIndex + 1];
+      playEpisode(nextEpisode, currentEpisodeIndex + 1);
+    } else {
+      // Voltar ao dashboard se for o último episódio
+      showDashboard();
+    }
+  };
+
+  const showDashboard = () => {
+    const playerSection = document.getElementById('player');
+    const originalVideoWrapper = playerSection.querySelector('.video-wrapper');
     const originalTitle = document.getElementById('playerTitle') || playerSection.querySelector('h2');
     const videoElem = originalVideoWrapper.querySelector('video');
     const transcriptSection = document.querySelector('.transcript-section');
-    const transcriptText = document.getElementById('transcriptText');
 
-    if (isPlayingIntro && currentPlayingEpisode) {
-      isPlayingIntro = false;
-      saveProgress(currentPlayingEpisode.id);
-
-      if (originalTitle) {
-        originalTitle.innerHTML = `Documentário: <span style="color:#f1c40f;">${currentPlayingEpisode.title}</span>`;
-      }
-
-      transcriptSection.style.setProperty('display', 'block', 'important');
-      transcriptText.innerText = currentPlayingEpisode.transcript;
-      transcriptText.classList.remove('visible'); 
-
-      videoElem.src = currentPlayingEpisode.video;
-      videoElem.play().catch(e => console.warn("Erro ao iniciar capítulo:", e));
-    } else {
-      blockNativeEnded = false;
-      currentPlayingEpisode = null;
-      
-      document.getElementById('netflixDashboardPanel').style.setProperty('display', 'none', 'important');
-      document.querySelector('.doc-tabs-nav').style.setProperty('display', 'flex', 'important');
-      document.getElementById('documentaryPanel').style.setProperty('display', 'block', 'important');
-      originalVideoWrapper.style.setProperty('display', 'none', 'important');
-      transcriptSection.style.setProperty('display', 'none', 'important');
-      if (originalTitle) originalTitle.style.setProperty('display', 'none', 'important');
-    }
+    blockNativeEnded = false;
+    document.getElementById('netflixDashboardPanel').style.setProperty('display', 'block', 'important');
+    document.querySelector('.doc-tabs-nav').style.setProperty('display', 'none', 'important');
+    document.getElementById('documentaryPanel').style.setProperty('display', 'none', 'important');
+    originalVideoWrapper.style.setProperty('display', 'none', 'important');
+    transcriptSection.style.setProperty('display', 'none', 'important');
+    if (originalTitle) originalTitle.style.setProperty('display', 'none', 'important');
+    videoElem.pause();
   };
 
-  const checkAndHook = () => {
+  // Inicializar quando o player estiver pronto
+  const initializeWhenReady = () => {
     const playerSection = document.getElementById('player');
-    if (!playerSection) return;
-
-    const isPlayerVisible = !playerSection.hasAttribute('hidden') && 
-                            !playerSection.classList.contains('hidden') && 
-                            window.getComputedStyle(playerSection).display !== 'none';
-
-    if (isPlayerVisible && !isDocUiInitialized) {
+    if (playerSection && !isDocUiInitialized) {
       injectDocumentaryUI(playerSection);
+    } else if (!playerSection) {
+      setTimeout(initializeWhenReady, 100);
     }
   };
 
-  checkAndHook();
-  const observer = new MutationObserver(checkAndHook);
-  observer.observe(document.body, { attributes: true, subtree: true, childList: true });
-  setInterval(checkAndHook, 400);
+  // Iniciar quando o DOM estiver pronto
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeWhenReady);
+  } else {
+    initializeWhenReady();
+  }
 })();
