@@ -2,21 +2,221 @@
   {
     "id": "ep1",
     "order": 1,
-    "title": "No Mercado Televisivo: Declínio Avançado",
-    "thumbnail": "assets/painel.jpg",
+    "title": "Origem e Ciclo Empresarial",
+    "thumbnail": "https://d2xsxph8kpxj0f.cloudfront.net/310519663681102695/2snvFktET2ZGnBHur5wA6j/ep1-decline-tv-FQXRKcEGwYtp8LTFupCKqM.webp",
     "video": "assets/ep1.mp4",
-    "summary": "Uma análise sobre a perda de relevância cultural, queda de audiência da TV paga e o impacto da fusão Warner + Discovery na Cartoon Network.",
-    "duration": "0:37",
-    "transcript": "1. No mercado televisivo: Declínio Avançado\\n\\nO DECLÍNIO DE UMA ERA\\n\\nA Cartoon Network foi uma das maiores marcas infantis do mundo entre os anos 1998 e 2014. Nesse período, dominava a audiência infantil em TV paga; possuía identidade visual extremamente forte; tinha programação autoral consistente; comandava cultura de internet infantil, influenciava games, memes e fandoms.\\n\\nHoje o cenário é diferente. O canal sofre com: queda da TV por assinatura; perda de relevância cultural; redução drástica de produções originais; dependência de poucas IPs; redução de horários dedicados ao canal; migração do público infantil para YouTube, TikTok e streaming.\\n\\nA própria Warner reconheceu implicitamente esse declínio ao reduzir investimentos na estrutura independente da marca. O início do declínio estrutural ocorreu aproximadamente entre 2016 e 2018. Esse período marca queda forte da audiência da TV paga; fim gradual da 'era de ouro' criativa do CN; excesso de dependência de Teen Titans Go!; cancelamentos de projetos experimentais; perda de espaço competitivo para streaming e YouTube. Mas o declínio se tornou oficialmente evidente em 2022, após a fusão: Warner + Discovery."
+    "summary": "A Cartoon Network atualmente está em um estágio que pode ser definido como declínio estrutural com tentativa de transição para reintegração digital.",
+    "duration": "5:42",
+    "transcript": "Episódio 1 – Origem e Ciclo Empresarial\n\nA Cartoon Network atualmente está em um estágio que pode ser definido como declínio estrutural com tentativa de transição para reintegração digital. Dentro do ciclo de vida empresarial clássico (introdução → crescimento → maturidade → declínio → reinvenção), o canal deixou a fase de maturidade e entrou em declínio operacional e cultural, enquanto a controladora Warner Bros. Discovery tenta reposicionar a marca dentro do ecossistema do streaming Max."
+  },
+  {
+    "id": "ep2",
+    "order": 2,
+    "title": "No Mercado Televisivo: Declínio Avançado",
+    "thumbnail": "https://d2xsxph8kpxj0f.cloudfront.net/310519663681102695/2snvFktET2ZGnBHur5wA6j/ep2-streaming-collapse-8PftNGMNaACL4cCwJYsLRM.webp",
+    "video": "assets/ep2.mp4",
+    "summary": "Uma análise sobre a perda de relevância cultural, queda de audiência da TV paga e o impacto da fusão Warner + Discovery.",
+    "duration": "6:15",
+    "transcript": "Episódio 2 – No Mercado Televisivo: Declínio Avançado\n\nA Cartoon Network foi uma das maiores marcas infantis do mundo entre os anos 1998 e 2014. Nesse período: dominava audiência infantil em TV paga; possuía identidade visual extremamente forte; tinha programação autoral consistente; comandava cultura de internet infantil; influenciava games, memes e fandoms.\n\nHoje o cenário é diferente: queda da TV por assinatura; perda de relevância cultural; redução drástica de produções originais; dependência de poucas IPs; redução de horários dedicados ao canal; migração do público infantil para YouTube, TikTok e streaming."
+  },
+  {
+    "id": "ep3",
+    "order": 3,
+    "title": "No Streaming: Fase de Absorção Corporativa",
+    "thumbnail": "https://d2xsxph8kpxj0f.cloudfront.net/310519663681102695/2snvFktET2ZGnBHur5wA6j/ep3-corporate-absorption-dHjM2xBtGRGE8yUR2KgKbk.webp",
+    "video": "assets/ep3.mp4",
+    "summary": "No setor digital, a Cartoon Network deixou de existir como ecossistema próprio e passou a funcionar apenas como biblioteca de conteúdo do Max.",
+    "duration": "4:28",
+    "transcript": "Episódio 3 – No Streaming: Fase de Absorção Corporativa\n\nNo setor digital, a Cartoon Network deixou de existir como ecossistema próprio e passou a funcionar apenas como 'biblioteca de conteúdo' do Max. A marca perdeu autonomia digital, deixou de ser plataforma e virou apenas uma seção dentro do streaming.\n\nSinais fortes disso: fechamento do site oficial em 2024, que redirecionou usuários ao Max, e encerramento do streaming Boomerang. Ambos simbolizam abandono de ecossistemas especializados e consolidação financeira."
+  },
+  {
+    "id": "ep4",
+    "order": 4,
+    "title": "Culturalmente: Fase de Erosão de Identidade",
+    "thumbnail": "https://d2xsxph8kpxj0f.cloudfront.net/310519663681102695/2snvFktET2ZGnBHur5wA6j/ep4-cultural-erosion-mtihn8JQKPhAgLeCF2eanp.webp",
+    "video": "assets/ep4.mp4",
+    "summary": "Entre 1998–2014, o CN era inovador, irreverente, experimental e artisticamente autoral. Produções como Adventure Time, Regular Show, Gumball e Steven Universe formaram uma identidade cultural extremamente forte.",
+    "duration": "5:03",
+    "transcript": "Episódio 4 – Culturalmente: Fase de Erosão de Identidade\n\nEntre 1998–2014, o CN era inovador, irreverente, experimental e artisticamente autoral. Produções como Adventure Time, Regular Show, Gumball e Steven Universe formaram uma identidade cultural extremamente forte.\n\nHoje a marca sofre porque perdeu experimentação, curadoria, conexão com infância contemporânea e deixou de ser 'evento cultural'. A Cartoon Network não dita mais tendências da animação ocidental como fazia antes."
+  },
+  {
+    "id": "ep5",
+    "order": 5,
+    "title": "O Ano-chave: 2022",
+    "thumbnail": "https://d2xsxph8kpxj0f.cloudfront.net/310519663681102695/2snvFktET2ZGnBHur5wA6j/ep5-2022-rupture-RbZZ32hVh76E468VQCSD76.webp",
+    "video": "assets/ep5.mp4",
+    "summary": "Embora os sintomas viessem desde 2016, o ponto de ruptura foi 2022, após a fusão que criou a Warner Bros. Discovery.",
+    "duration": "4:51",
+    "transcript": "Episódio 5 – O Ano-chave: 2022\n\nEmbora os sintomas viessem desde 2016, o ponto de ruptura foi 2022, após a fusão que criou a Warner Bros. Discovery. Foi o momento em que começou a integração forçada das divisões, ocorreram cortes massivos, fusão entre CN Studios e Warner Bros. Animation, cancelamentos e perda de independência criativa. A marca deixou de ser prioridade estratégica e virou ativo secundário."
+  },
+  {
+    "id": "ep6",
+    "order": 6,
+    "title": "Principais Erros da Warner Bros. Discovery",
+    "thumbnail": "https://d2xsxph8kpxj0f.cloudfront.net/310519663681102695/2snvFktET2ZGnBHur5wA6j/ep6-errors-montage-AnHZbGBzjeRyzzMbHRnpov.webp",
+    "video": "assets/ep6.mp4",
+    "summary": "Uma série de decisões estratégicas que aceleraram o declínio: transformar marcas em catálogo, excesso de foco financeiro, destruição do ecossistema digital.",
+    "duration": "5:17",
+    "transcript": "Episódio 6 – Principais Erros da Warner Bros. Discovery\n\n• Transformar marcas em catálogo, destruindo fidelização emocional.\n• Excesso de foco financeiro de curto prazo, com cortes e cancelamentos.\n• Destruição do ecossistema digital clássico, como o site CN.\n• Dependência excessiva de poucas franquias (Teen Titans Go!).\n• Falta de estratégia infantil moderna, enquanto concorrentes evoluíam.\n• Perda de preservação histórica, apagando jogos e removendo animações."
+  },
+  {
+    "id": "ep7",
+    "order": 7,
+    "title": "Em Resumo",
+    "thumbnail": "https://d2xsxph8kpxj0f.cloudfront.net/310519663681102695/2snvFktET2ZGnBHur5wA6j/ep7-summary-void-2iH4yGuMwoTq9AiUC9FrfX.webp",
+    "video": "assets/ep7.mp4",
+    "summary": "O estado atual da Cartoon Network em múltiplas dimensões: TV, streaming, cultura e marca.",
+    "duration": "3:42",
+    "transcript": "Episódio 7 – Em Resumo\n\nA Cartoon Network está hoje em:\n• TV: declínio avançado\n• Streaming: absorção corporativa\n• Cultura: erosão de identidade\n• Marca: sobrevivência via nostalgia\n• Estratégia atual: consolidação dentro do Max"
+  },
+  {
+    "id": "ep8",
+    "order": 8,
+    "title": "Definição da Situação Atual",
+    "thumbnail": "https://d2xsxph8kpxj0f.cloudfront.net/310519663681102695/2snvFktET2ZGnBHur5wA6j/ep8-identity-crisis-aaSPRUsiVmxFjFnuspC2J4.webp",
+    "video": "assets/ep8.mp4",
+    "summary": "A crise multidimensional enfrentada pela marca: identidade, relevância cultural, competitividade digital e diferenciação.",
+    "duration": "4:09",
+    "transcript": "Episódio 8 – Definição da Situação Atual\n\nCrise de identidade, relevância cultural, competitividade digital e diferenciação de marca. CN deixou de ser referência criativa e virou canal secundário, biblioteca nostálgica do Max."
+  },
+  {
+    "id": "ep9",
+    "order": 9,
+    "title": "Objetivo Geral",
+    "thumbnail": "https://d2xsxph8kpxj0f.cloudfront.net/310519663681102695/2snvFktET2ZGnBHur5wA6j/ep9-objective-light-CjGWz9ePkMTQaDCPsAx9fJ.webp",
+    "video": "assets/ep9.mp4",
+    "summary": "Reposicionar a Cartoon Network como a principal marca de entretenimento animado interativo da geração digital.",
+    "duration": "4:33",
+    "transcript": "Episódio 9 – Objetivo Geral\n\nReposicionar a Cartoon Network como 'a principal marca de entretenimento animado interativo da geração digital'. O objetivo não é voltar aos anos 2000, mas transformar nostalgia em linguagem viva para a geração atual."
+  },
+  {
+    "id": "ep10",
+    "order": 10,
+    "title": "Nova Proposta de Valor",
+    "thumbnail": "https://d2xsxph8kpxj0f.cloudfront.net/310519663681102695/2snvFktET2ZGnBHur5wA6j/ep10-transformation-o6Wm4TGV3ZKwp9iiyYxTnQ.webp",
+    "video": "assets/ep10.mp4",
+    "summary": "Da proposta antiga para a nova realidade: de um canal de desenhos para uma experiência interativa multiplataforma.",
+    "duration": "3:58",
+    "transcript": "Episódio 10 – Nova Proposta de Valor\n\nAntiga: 'Um canal de desenhos para crianças.'\n\nNova: 'Uma experiência interativa onde animação, jogos, memes, música e internet coexistem em tempo real.'"
+  },
+  {
+    "id": "ep11",
+    "order": 11,
+    "title": "Novo Posicionamento",
+    "thumbnail": "assets/painel.jpg",
+    "video": "assets/ep11.mp4",
+    "summary": "Posicionamento estratégico: A internet animada. CN passa a competir com TikTok, Roblox, Fortnite, YouTube, Discord e Twitch.",
+    "duration": "4:21",
+    "transcript": "Episódio 11 – Novo Posicionamento\n\nPosicionamento estratégico: 'A internet animada.' CN passa a competir não apenas com canais infantis, mas com TikTok, Roblox, Fortnite, YouTube, Discord e Twitch."
+  },
+  {
+    "id": "ep12",
+    "order": 12,
+    "title": "Segmentação",
+    "thumbnail": "assets/painel.jpg",
+    "video": "assets/ep12.mp4",
+    "summary": "Público primário: Geração Alpha (7–14 anos). Público secundário: Gen Z nostálgica (15–28 anos).",
+    "duration": "3:45",
+    "transcript": "Episódio 12 – Segmentação\n\nPúblico primário: Geração Alpha (7–14 anos).\nPúblico secundário: Gen Z nostálgica (15–28 anos).\nAmbos essenciais para viralização, consumo e reconstrução cultural."
+  },
+  {
+    "id": "ep13",
+    "order": 13,
+    "title": "Estratégia Central: CN Universe",
+    "thumbnail": "assets/painel.jpg",
+    "video": "assets/ep13.mp4",
+    "summary": "CN deixa de ser canal e vira universo digital multiplataforma com streaming híbrido, ecossistema de games e interatividade.",
+    "duration": "5:02",
+    "transcript": "Episódio 13 – Estratégia Central: CN Universe\n\nCN deixa de ser canal e vira universo digital multiplataforma. Inclui streaming híbrido, ecossistema de games, linguagem meme/internet e interatividade constante."
+  },
+  {
+    "id": "ep14",
+    "order": 14,
+    "title": "Revitalização do Site",
+    "thumbnail": "assets/painel.jpg",
+    "video": "assets/ep14.mp4",
+    "summary": "Retorno do CartoonNetwork.com como CN Hub: rede social leve, central de jogos, eventos ao vivo, memes e avatares personalizados.",
+    "duration": "4:38",
+    "transcript": "Episódio 14 – Revitalização do Site\n\nRetorno do CartoonNetwork.com como 'CN Hub': rede social leve, central de jogos, eventos ao vivo, memes, rankings e avatares personalizados."
+  },
+  {
+    "id": "ep15",
+    "order": 15,
+    "title": "Estratégia de Games",
+    "thumbnail": "assets/painel.jpg",
+    "video": "assets/ep15.mp4",
+    "summary": "Reviver clássicos como FusionFall e Cartoon Orbit. Criar novos jogos e integração com Roblox e Minecraft.",
+    "duration": "5:11",
+    "transcript": "Episódio 15 – Estratégia de Games\n\nReviver clássicos como FusionFall e Cartoon Orbit. Criar novos jogos como Cartoon Network Multiverse e CN Chaos. Integração com Roblox e Minecraft."
+  },
+  {
+    "id": "ep16",
+    "order": 16,
+    "title": "Parcerias Estratégicas",
+    "thumbnail": "assets/painel.jpg",
+    "video": "assets/ep16.mp4",
+    "summary": "Fortnite com ilhas temáticas, Brawl Stars com skins CN, mundos permanentes em Roblox e pacotes em Minecraft.",
+    "duration": "4:25",
+    "transcript": "Episódio 16 – Parcerias Estratégicas\n\nFortnite com ilhas temáticas, Brawl Stars com skins CN, mundos permanentes em Roblox e pacotes em Minecraft."
   },
   {
     "id": "ep17",
     "order": 17,
-    "title": "Sua Estratégia Cultural",
+    "title": "Estratégia de Comunicação",
     "thumbnail": "assets/painel.jpg",
     "video": "assets/ep17.mp4",
-    "summary": "A criação de eventos em tempo real para transformar lembranças passadas em engajamento ativo.",
-    "duration": "10:05",
-    "transcript": "11. ESTRATÉGIA CULTURAL\\n\\nTransformar nostalgia em EXPERIÊNCIA\\nErro comum: apenas repostar desenhos antigos.\\nEstratégia correta: transformar memórias em eventos vivos.\\n\\nExemplo:\\n\"CN Fridays Reborn\"\\nToda sexta: transmissão ao vivo; episódios surpresa; chat global; mini-games; drops digitais; creators convidados."
+    "summary": "Abandonar tom corporativo infantil. Adotar linguagem irônica, caótica, memeável e visual.",
+    "duration": "4:52",
+    "transcript": "Episódio 17 – Estratégia de Comunicação\n\nAbandonar tom corporativo infantil. Adotar linguagem irônica, caótica, memeável e visual. Plataformas-chave: TikTok, YouTube, Twitch, Discord, Instagram e Roblox."
+  },
+  {
+    "id": "ep18",
+    "order": 18,
+    "title": "Estratégia Cultural",
+    "thumbnail": "assets/painel.jpg",
+    "video": "assets/ep18.mp4",
+    "summary": "Transformar nostalgia em experiência viva. Exemplo: CN Fridays Reborn com transmissões ao vivo e drops digitais.",
+    "duration": "5:34",
+    "transcript": "Episódio 18 – Estratégia Cultural\n\nTransformar nostalgia em experiência viva. Exemplo: 'CN Fridays Reborn' com transmissões ao vivo, episódios surpresa, mini-games e drops digitais."
+  },
+  {
+    "id": "ep19",
+    "order": 19,
+    "title": "PESTEL",
+    "thumbnail": "assets/painel.jpg",
+    "video": "assets/ep19.mp4",
+    "summary": "Impactos políticos, econômicos, sociais, tecnológicos, ambientais e legais moldam o futuro da CN.",
+    "duration": "6:07",
+    "transcript": "Episódio 19 – PESTEL\n\nImpactos políticos, econômicos, sociais, tecnológicos, ambientais e legais moldam o futuro da CN."
+  },
+  {
+    "id": "ep20",
+    "order": 20,
+    "title": "SWOT",
+    "thumbnail": "assets/painel.jpg",
+    "video": "assets/ep20.mp4",
+    "summary": "Forças: IPs históricas e nostalgia. Fraquezas: perda de identidade. Oportunidades: expansão gamer. Ameaças: TikTok, YouTube, Disney.",
+    "duration": "5:43",
+    "transcript": "Episódio 20 – SWOT\n\nForças: IPs históricas e nostalgia.\nFraquezas: perda de identidade e baixa inovação.\nOportunidades: expansão gamer e fandoms.\nAmeaças: TikTok, YouTube, Disney e saturação do streaming."
+  },
+  {
+    "id": "ep21",
+    "order": 21,
+    "title": "Hipóteses Estratégicas",
+    "thumbnail": "assets/painel.jpg",
+    "video": "assets/ep21.mp4",
+    "summary": "Premissas que guiam a transformação: CN interativa, nostalgia ativa, jogos sociais e identidade modernizada.",
+    "duration": "4:19",
+    "transcript": "Episódio 21 – Hipóteses Estratégicas\n\nHipótese 1: CN interativa recupera relevância cultural.\nHipótese 2: Nostalgia ativa reconstrói público.\nHipótese 3: Jogos sociais recriam comunidade.\nHipótese 4: Identidade visual modernizada diferencia a marca."
+  },
+  {
+    "id": "ep22",
+    "order": 22,
+    "title": "Resultados Esperados",
+    "thumbnail": "assets/painel.jpg",
+    "video": "assets/ep22.mp4",
+    "summary": "Visão de sucesso em diferentes horizontes: curto, médio e longo prazo.",
+    "duration": "6:21",
+    "transcript": "Episódio 22 – Resultados Esperados\n\nCurto prazo: recuperação de buzz e presença social.\nMédio prazo: reconstrução da identidade cultural e crescimento digital.\nLongo prazo: CN novamente como marca culturalmente influente da animação ocidental."
   }
 ]
