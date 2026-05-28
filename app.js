@@ -21,6 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const playIntro = async () => {
     try {
+      // Tenta reproduzir o vídeo de intro
       await introVideo.play();
     } catch (err) {
       console.warn("Autoplay bloqueado pelo navegador:", err);
@@ -36,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
   skipIntroBtn.addEventListener('click', showProfiles);
   introVideo.addEventListener('ended', showProfiles);
 
-  // Inicia tentando tocar
+  // Inicia tentando tocar o vídeo de intro
   playIntro();
 
   // --- Profiles Logic ---
